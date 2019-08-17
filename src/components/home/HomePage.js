@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../../redux/action';
 import axios from 'axios';
+import ReroutingButton from '../header_footer/ReroutingButton';
 
 const hash = window.location.hash
   .substring(1)
@@ -23,7 +24,6 @@ class HomePage extends Component {
   }
 
   async componentDidMount() {
-
     let _token = hash.access_token;
     if (_token) {
       const user = await axios.get('https://api.spotify.com/v1/me', { headers: { Authorization: `Bearer ${_token}` } })
@@ -34,7 +34,7 @@ class HomePage extends Component {
   render() {
     return (
       <div>
-        <h1> Welcome Home! </h1>
+        <ReroutingButton name='Login Page' redirectUrl='/'/>
       </div>
     )
   }
