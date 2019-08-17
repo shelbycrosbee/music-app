@@ -27,7 +27,8 @@ const tokenReducer = function (state = { token: null }, action) {
     case LOGIN: {
       return {
         ...state,
-        token: `Bearer ${action.payload.token}`
+        token: `Bearer ${action.payload.token}`,
+        token_init: action.payload.token
       }
     }
     default:

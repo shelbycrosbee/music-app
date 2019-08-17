@@ -19,7 +19,7 @@ class PlaylistRedirectButton extends Component {
   }
 
   async playlistRedirect(e){
-    await axios.get(`${this.API_URL}playlists`, { params: {spotify_id: e.target.value}})
+    await axios.get(`${process.env.REACT_APP_API_URL}playlist`, { params: {spotify_id: e.target.value}})
     .then(response => {
       console.log(response);
       //implement SPOTIFY API CALL function from REDUX

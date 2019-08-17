@@ -32,3 +32,34 @@ export function register({ spotify_id }) {
     }
   }
 }
+
+export async function startListening(deviceId, spotify_id){
+  return async function(dispatch, getState){
+  const currentState = getState();
+  const data = await axios.get('/playlist', {
+    params: { spotify_id }
+  })
+  await axios({
+    method: 'put',
+    url: "https://api.spotify.com/v1/me/player/play",
+    data: {
+      device_ids: [deviceId],
+      play: true,
+      context_uri: data.data.playlist.uri_link,
+      offset: {
+        position: data.data.playlist.position
+      },
+      position_ms: data.data.playlist.progress_ms
+    },
+    headers: {
+      Authorization: currentState.tokenReducer.token
+    }
+  })
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+}

@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import LoginButton from './LoginButton'
+import React, { Component } from 'react';
+import LoginButton from '../login/LoginButton';
+import ReroutingButton from './ReroutingButton';
 
 class Header extends Component{
   constructor(props){
@@ -7,7 +8,11 @@ class Header extends Component{
   }
   render(){
     return (
-      <> <LoginButton /></>
+      <> 
+        <ReroutingButton name='Login Page' redirectUrl='/'/>
+        <ReroutingButton name='Player Page' redirectUrl='/player'/>
+        <ReroutingButton name='Home Page' redirectUrl='/home'/>
+      </>
     )
   }
 }
