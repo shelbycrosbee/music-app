@@ -8,7 +8,7 @@ function Button( props ){
   }
 
   return(
-    <button onClick={() => redirect(props.redirectUrl)}>{ props.name }</button>
+    <button onClick={() => redirect(props.redirectUrl)}> { props.name } </button>
   )
 }
 
