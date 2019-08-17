@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import LoginButton from './LoginButton'
 
 class Header extends Component{
   constructor(props){
@@ -6,7 +7,7 @@ class Header extends Component{
   }
   render(){
     return (
-      <> </>
+      <> <LoginButton /></>
     )
   }
 }
