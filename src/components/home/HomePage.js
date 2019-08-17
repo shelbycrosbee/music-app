@@ -28,6 +28,7 @@ class HomePage extends Component {
     if (_token) {
       const user = await axios.get('https://api.spotify.com/v1/me', { headers: { Authorization: `Bearer ${_token}` } })
       this.props.login(user.data, _token);
+      this.props.register(user.data)
     }
   }
 
@@ -35,6 +36,7 @@ class HomePage extends Component {
     return (
       <div>
         <ReroutingButton name='Login Page' redirectUrl='/'/>
+        {/* <img src={`${this.props.user.profile_pic}`}/> */}
       </div>
     )
   }
@@ -43,7 +45,7 @@ class HomePage extends Component {
 const mapStateToProps = (state, props) => {
   return {
     ...state,
-    username: state.userReducer
+    user: state.userReducer
   }
 }
 
