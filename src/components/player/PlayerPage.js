@@ -6,6 +6,7 @@ import * as Actions from '../../redux/action';
 import axios from 'axios';
 import ReroutingButton from '../header_footer/ReroutingButton';
 import Player from './Player';
+import { Row }  from 'react-bootstrap'
 
 
 
@@ -16,10 +17,10 @@ class PlayerPage extends Component {
 
   render() {
     return (
-      <div>
+      <Row className="justify-content-center">
         <Player />
         {/* <img src={`${this.props.user.profile_pic}`}/> */}
-      </div>
+      </Row>
     )
   }
 }

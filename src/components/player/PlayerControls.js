@@ -42,8 +42,7 @@ class PlayerControls extends Component {
     this.props.player.nextTrack();
   }
   render() {
-    // if(this.props.spotifyInit){
-      if(true){
+    if(this.props.spotifyInit){
     return (
       <div>
         <button onClick={() => this.onPrevClick()}>Previous</button>

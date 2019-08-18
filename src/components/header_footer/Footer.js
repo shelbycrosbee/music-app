@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-
+import {
+  Card,
+  Button
+} from 'react-bootstrap'
 /*Required Local Props :
   --none
 Required Global Props :
@@ -8,13 +11,17 @@ Required Global Props :
   --
 */
 
-class Footer extends Component{
-  constructor(props){
+class Footer extends Component {
+  constructor(props) {
     super(props);
   }
-  render(){
+  render() {
     return (
-      <> </>
+
+
+          <Card.Footer style={{bottom: 0, position: 'fixed', width: '100%'}}>Footer</Card.Footer>
+     
+
     )
   }
 }
