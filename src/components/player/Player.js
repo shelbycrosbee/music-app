@@ -18,12 +18,20 @@ class Player extends React.Component {
       playing: false,
       position: 0,
       duration: 0,
+      spotifyInit: false
     };
     this.checkForPlayer = this.checkForPlayer.bind(this);
   }
 
 
 
+  componentDidMount() {
+    window.onSpotifyWebPlaybackSDKReady = () => {
+      this.checkForPlayer();
+    }
+    this.setState({ loggedIn: true });
+    this.checkForPlayer();
+  }
 
 
   checkForPlayer() {
@@ -33,9 +41,11 @@ class Player extends React.Component {
         getOAuthToken: cb => { cb(this.props.token_init); },
       });
       this.createEventHandlers();
-      // finally, connect!
       this.player.connect();
-    }
+      this.setState({
+        spotifyInit: true
+      })
+    } 
   }
 
   onStateChanged(state) {
@@ -92,10 +102,6 @@ class Player extends React.Component {
   }
 
 
-  componentDidMount() {
-    this.setState({ loggedIn: true });
-    this.checkForPlayer();
-  }
 
   transferPlaybackHere() {
     const { deviceId } = this.state;
@@ -215,7 +221,12 @@ class Player extends React.Component {
           <p>Track: {trackName}</p>
           <p>Album: {albumName}</p>
           <p>
-            <PlayerControls />
+            <PlayerControls 
+            playing={this.state.playing}
+            player={this.player}
+            checkForPlayer={() => this.checkForPlayer()}
+            spotifyInit={this.state.spotifyInit}
+            />
           </p>
         </div>
         }
