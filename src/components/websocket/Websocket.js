@@ -41,12 +41,13 @@ class Websocket extends React.Component {
       this.setState({ isConnected: true });
     })
     const newPlaylist = ws.subscribe(`playlist:${this.props.uri_link}`)
+    const newPlaylist2 = ws.subscribe(`playlist:2`)
     console.log(newPlaylist)
     this.setState({ playlist: newPlaylist });
   }
 
   sendToAPI() {
-    this.state.playlist.emit('var', { body: 'VERY!!!OBVIOUS!!!TEXT!!!'});
+    this.state.playlist.emit('singleSend', '1');
   }
 
   render() {
