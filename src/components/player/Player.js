@@ -29,7 +29,6 @@ class Player extends React.Component {
     window.onSpotifyWebPlaybackSDKReady = () => {
       this.checkForPlayer();
     }
-    this.setState({ loggedIn: true });
     this.checkForPlayer();
   }
 
@@ -78,7 +77,7 @@ class Player extends React.Component {
     this.player.on('initialization_error', e => { console.error(e); });
     this.player.on('authentication_error', e => {
       console.error(e);
-      this.setState({ loggedIn: false });
+     
     });
     this.player.on('account_error', e => { console.error(e); });
     this.player.on('playback_error', e => { console.error(e); });
@@ -197,7 +196,6 @@ class Player extends React.Component {
 
   render() {
     const {
-      loggedIn,
       artistName,
       trackName,
       albumName,
