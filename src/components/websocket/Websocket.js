@@ -12,8 +12,11 @@ class Websocket extends React.Component {
     super(props);
     this.state = {
       isConnected: false,
-      playlist: ''
+      playlist: '',
+      spotify_id: ''
     }
+    this.onChange = this.onChange.bind(this);
+    this.initializePlaylist = this.initializePlaylist.bind(this);
 
     // ws.connect()
     // ws.on('close', () => {
@@ -50,6 +53,15 @@ class Websocket extends React.Component {
     this.state.playlist.emit('singleSend', '1');
   }
 
+  initializePlaylist(e) {
+    e.preventDefault();
+    this.state.playlist.emit('initialize', { spotify_id: this.state.spotify_id, topic_id: '1' })
+  }
+
+  onChange(e) {
+    this.setState({ spotify_id: e.target.value })
+  }
+
   render() {
     return (
       <div>
@@ -57,6 +69,8 @@ class Websocket extends React.Component {
         <button onClick={() => this.connect()}> Connect? </button>
         <button onClick={() => this.disconnect()}> Disconnect! </button>
         <button onClick={() => this.sendToAPI()} > Send </button>
+        <form onSubmit={this.initializePlaylist}> <input type="text" name='spotify_id' value={this.state.spotify_id} onChange={this.onChange} /> </form>
+
       </div>
     )
   }

@@ -17,10 +17,10 @@ class Header extends Component {
             <Nav.Link><ReroutingButton name='Login' redirectUrl='/' /></Nav.Link>
             <Nav.Link><ReroutingButton name='Player' redirectUrl='/player' /></Nav.Link>
           </Nav>
-          <Form inline>
+          {/* <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="outline-light">Search</Button>
-          </Form>
+          </Form> */}
         </Navbar>
         
     )
