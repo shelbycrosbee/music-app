@@ -1,10 +1,16 @@
-import { combineReducer, combineReducers } from 'redux';
-import { LOGIN } from './actionType';
+import { combineReducers } from 'redux';
+import { LOGIN, STORE_PLAYLIST } from './actionType';
 
 const initialUserState = {
   display_name: null,
   spotify_id: null,
   profile_pic: null
+}
+
+const initialPlaylistState = {
+  uri_link: '62OqyAX5XFoXu0CykxhOyA',
+  position: 0,
+  progress_ms: 0
 }
 
 const userReducer = function (state = initialUserState, action) {
@@ -36,5 +42,19 @@ const tokenReducer = function (state = { token: null }, action) {
   }
 }
 
+const playlistReducer = function (state = initialPlaylistState, action) {
+  switch (action.type) {
+    case STORE_PLAYLIST: {
+      return {
+        ...state,
+        uri_link: action.payload.uri_link,
+        position: action.payload.position,
+        progress_ms: action.payload.progress_ms
+      }
+    }
+    default:
+      return state;
+  }
+}
 
-export default combineReducers({ userReducer, tokenReducer })
+export default combineReducers({ userReducer, tokenReducer, playlistReducer })
