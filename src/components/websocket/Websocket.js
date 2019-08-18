@@ -46,7 +46,7 @@ class Websocket extends React.Component {
   }
 
   sendToAPI() {
-    this.state.playlist.emit('message', { body: 'text'});
+    this.state.playlist.emit('var', { body: 'VERY!!!OBVIOUS!!!TEXT!!!'});
   }
 
   render() {
