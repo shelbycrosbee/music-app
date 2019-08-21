@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as Actions from '../../redux/action';
 import axios from 'axios';
 import ReroutingButton from '../header_footer/ReroutingButton';
+import Websocket from '../websocket/Websocket';
 
 const hash = window.location.hash
   .substring(1)
@@ -35,6 +36,7 @@ class HomePage extends Component {
   render() {
     return (
       <div>
+        <Websocket uri_link='1'/>
         {/* <img src={`${this.props.user.profile_pic}`}/> */}
       </div>
     )

@@ -48,7 +48,7 @@ class PlayerControls extends Component {
         <button onClick={() => this.onPrevClick()}>Previous</button>
               <button onClick={() => this.onPlayClick()}>{this.props.playing ? "Pause" : "Play"}</button>
               <button onClick={() => this.onNextClick()}>Next</button>
-              <button onClick={() => this.joinButton()}>Christina</button>
+              <button onClick={() => this.props.joinButton()}>Join</button>
 
       </div>
     )}
@@ -65,7 +65,8 @@ const mapStateToProps = (state, props) => {
   return {
     ...state,
     user: state.userReducer,
-    token: state.tokenReducer.token
+    token: state.tokenReducer.token,
+    playlist: state.playlistReducer,
   }
 }
 

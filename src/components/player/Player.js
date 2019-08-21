@@ -15,6 +15,7 @@ class Player extends React.Component {
       trackName: "Track Name",
       artistName: "Artist Name",
       albumName: "Album Name",
+      albumImage: '',
       playing: false,
       position: 0,
       duration: 0,
@@ -29,7 +30,6 @@ class Player extends React.Component {
     window.onSpotifyWebPlaybackSDKReady = () => {
       this.checkForPlayer();
     }
-    this.setState({ loggedIn: true });
     this.checkForPlayer();
   }
 
@@ -45,7 +45,7 @@ class Player extends React.Component {
       this.setState({
         spotifyInit: true
       })
-    } 
+    }
   }
 
   onStateChanged(state) {
@@ -59,11 +59,13 @@ class Player extends React.Component {
       } = state.track_window;
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
+      const albumImage = currentTrack.album.images[1].url;
       const artistName = currentTrack.artists
         .map(artist => artist.name)
         .join(", ");
       const playing = !state.paused;
       this.setState({
+        albumImage,
         position,
         duration,
         trackName,
@@ -78,7 +80,7 @@ class Player extends React.Component {
     this.player.on('initialization_error', e => { console.error(e); });
     this.player.on('authentication_error', e => {
       console.error(e);
-      this.setState({ loggedIn: false });
+
     });
     this.player.on('account_error', e => { console.error(e); });
     this.player.on('playback_error', e => { console.error(e); });
@@ -165,21 +167,23 @@ class Player extends React.Component {
 
   async joinButton() {
     const { deviceId } = this.state;
-    const spotify_id = 'christina'
-    const data = await axios.get('/playlist', {
-      params: { spotify_id: spotify_id }
-    })
+    // const spotify_id = 'join'
+    // const data = await axios.get('/playlist', {
+    //   params: { spotify_id: spotify_id }
+    // })
+    console.log(this.props.playlist)
     await axios({
       method: 'put',
       url: "https://api.spotify.com/v1/me/player/play",
       data: {
         device_ids: [deviceId],
         play: true,
-        context_uri: data.data.playlist.uri_link,
+        context_uri: `spotify:playlist:${this.props.playlist.uri_link}`,
         offset: {
-          position: data.data.playlist.position
+          position: this.props.playlist.position
         },
-        position_ms: data.data.playlist.progress_ms
+
+        position_ms: this.props.playlist.progress_ms
       },
       headers: {
         Authorization: `${this.props.token}`
@@ -197,10 +201,10 @@ class Player extends React.Component {
 
   render() {
     const {
-      loggedIn,
       artistName,
       trackName,
       albumName,
+      albumImage,
       error,
       position,
       duration,
@@ -217,15 +221,17 @@ class Player extends React.Component {
 
         {error && <p>Error: {error}</p>}
         <div>
+          <img src={albumImage} alt="album art" />
           <p>Artist: {artistName}</p>
           <p>Track: {trackName}</p>
           <p>Album: {albumName}</p>
           <p>
-            <PlayerControls 
-            playing={this.state.playing}
-            player={this.player}
-            checkForPlayer={() => this.checkForPlayer()}
-            spotifyInit={this.state.spotifyInit}
+            <PlayerControls
+              playing={this.state.playing}
+              player={this.player}
+              checkForPlayer={() => this.checkForPlayer()}
+              joinButton={() => this.joinButton()}
+              spotifyInit={this.state.spotifyInit}
             />
           </p>
         </div>
@@ -239,7 +245,8 @@ const mapStateToProps = (state, props) => {
     ...state,
     user: state.userReducer,
     token: state.tokenReducer.token,
-    token_init: state.tokenReducer.token_init
+    token_init: state.tokenReducer.token_init,
+    playlist: state.playlistReducer
   }
 }
 

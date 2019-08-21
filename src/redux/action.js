@@ -1,4 +1,4 @@
-import { LOGIN, REGISTER } from './actionType';
+import { LOGIN, REGISTER, STORE_PLAYLIST } from './actionType';
 import axios from 'axios';
 
 export function login(user, token, history) {
@@ -60,6 +60,21 @@ export async function startListening(deviceId, spotify_id){
     })
     .catch(error => {
       console.log(error)
+    })
+  }
+}
+
+
+export function getPlaylist(playlist_data) {
+  console.log(playlist_data);
+  return async function (dispatch, getState) {
+    dispatch({
+      type: STORE_PLAYLIST,
+      payload: {
+        uri_link: playlist_data.uri_link,
+        position: playlist_data.position,
+        progress_ms: playlist_data.progress_ms
+      }
     })
   }
 }
