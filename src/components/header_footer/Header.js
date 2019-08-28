@@ -16,7 +16,9 @@ class Header extends Component {
           <Nav className="mr-auto">
             <Nav.Link><ReroutingButton name='Login' redirectUrl='/' /></Nav.Link>
             <Nav.Link><ReroutingButton name='Player' redirectUrl='/player' /></Nav.Link>
+            <Nav.Link><ReroutingButton name='Playlists' redirectUrl='/playlists' /></Nav.Link>
           </Nav>
+          
           {/* <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="outline-light">Search</Button>

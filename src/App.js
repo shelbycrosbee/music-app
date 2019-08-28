@@ -5,6 +5,7 @@ import PlayerPage from './components/player/PlayerPage';
 import LoginPage from './components/login/LoginPage';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Footer from './components/header_footer/Footer';
+import PlaylistPage from './components/playlists/PlaylistPage';
 
 
 
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/" component={LoginPage} />
         <Route path="/home" component={HomePage} />
         <Route path="/player" component={PlayerPage} />
+        <Route path="/playlists" component={PlaylistPage} />
       </Switch>
       <Footer />
     </div>

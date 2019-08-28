@@ -40,7 +40,6 @@ class HomePage extends Component {
       <div>
         <PlaylistRedirectButton topic_id='1234' display_name='Shelby' />
         {/* <img src={`${this.props.user.profile_pic}`}/> */}
-        <Playlists />
       </div>
     )
   }
