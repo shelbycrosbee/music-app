@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as Actions from '../../redux/action';
 import axios from 'axios';
 import PlaylistRedirectButton from '../playlists/PlaylistRedirectButton'
+import Playlists from '../playlists/Playlists';
 // import ReroutingButton from '../header_footer/ReroutingButton';
 // import Websocket from '../websocket/Websocket';
 
@@ -39,6 +40,7 @@ class HomePage extends Component {
       <div>
         <PlaylistRedirectButton topic_id='1234' display_name='Shelby' />
         {/* <img src={`${this.props.user.profile_pic}`}/> */}
+        <Playlists />
       </div>
     )
   }
