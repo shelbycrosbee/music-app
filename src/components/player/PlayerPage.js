@@ -7,6 +7,7 @@ import axios from 'axios';
 import ReroutingButton from '../header_footer/ReroutingButton';
 import Player from './Player';
 import { Row }  from 'react-bootstrap'
+import Websocket from '../websocket/Websocket'
 
 
 
@@ -19,6 +20,7 @@ class PlayerPage extends Component {
     return (
       <Row className="justify-content-center">
         <Player />
+        <Websocket />
         {/* <img src={`${this.props.user.profile_pic}`}/> */}
       </Row>
     )

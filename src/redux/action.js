@@ -1,4 +1,4 @@
-import { LOGIN, REGISTER, STORE_PLAYLIST } from './actionType';
+import { LOGIN, REGISTER, STORE_PLAYLIST, STORE_TOPIC } from './actionType';
 import axios from 'axios';
 
 export function login(user, token, history) {
@@ -60,6 +60,17 @@ export async function startListening(deviceId, spotify_id){
     })
     .catch(error => {
       console.log(error)
+    })
+  }
+}
+
+export function storeTopic(topic_id){
+  return async function (dispatch, getState) {
+    dispatch({
+      type: STORE_TOPIC,
+      payload: {
+        topic_id
+      }
     })
   }
 }

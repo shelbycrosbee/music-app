@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { LOGIN, STORE_PLAYLIST } from './actionType';
+import { LOGIN, STORE_PLAYLIST, STORE_TOPIC } from './actionType';
 
 const initialUserState = {
   display_name: null,
@@ -8,6 +8,7 @@ const initialUserState = {
 }
 
 const initialPlaylistState = {
+  topic_id: '',
   uri_link: '62OqyAX5XFoXu0CykxhOyA',
   position: 0,
   progress_ms: 0
@@ -57,4 +58,17 @@ const playlistReducer = function (state = initialPlaylistState, action) {
   }
 }
 
-export default combineReducers({ userReducer, tokenReducer, playlistReducer })
+const topicReducer = function ( state = {topic_id: ''}, action) {
+  switch (action.type) {
+    case STORE_TOPIC: {
+      return {
+        ...state,
+        topic_id: action.payload.topic_id
+      }
+    }
+    default:
+      return state;
+  }
+}
+
+export default combineReducers({ userReducer, tokenReducer, playlistReducer, topicReducer })

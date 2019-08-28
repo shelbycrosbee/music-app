@@ -3,7 +3,6 @@ import Ws from '@adonisjs/websocket-client'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../../redux/action';
-import { WSAEDESTADDRREQ } from 'constants';
 
 const ws = Ws('ws://localhost:3333')
 
@@ -43,19 +42,18 @@ class Websocket extends React.Component {
       console.log("We've made it");
       this.setState({ isConnected: true });
     })
-    const newPlaylist = ws.subscribe(`playlist:${this.props.uri_link}`)
-    const newPlaylist2 = ws.subscribe(`playlist:2`)
+    const newPlaylist = ws.subscribe(`playlist:${this.props.topic_id}`)
     console.log(newPlaylist)
     this.setState({ playlist: newPlaylist });
   }
 
   sendToAPI() {
-    this.state.playlist.emit('singleSend', '1');
+    this.state.playlist.emit('singleSend', { spotify_id: 1, topic_id: "soup" });
   }
 
   initializePlaylist(e) {
     e.preventDefault();
-    this.state.playlist.emit('initialize', { spotify_id: this.state.spotify_id, topic_id: '1' })
+    this.state.playlist.emit('initialize', { spotify_id: this.state.spotify_id, topic_id: this.props.topic_id })
   }
 
   onChange(e) {
@@ -69,7 +67,7 @@ class Websocket extends React.Component {
         <button onClick={() => this.connect()}> Connect? </button>
         <button onClick={() => this.disconnect()}> Disconnect! </button>
         <button onClick={() => this.sendToAPI()} > Send </button>
-        <form onSubmit={this.initializePlaylist}> <input type="text" name='spotify_id' value={this.state.spotify_id} onChange={this.onChange} /> </form>
+        <form onSubmit={this.initializePlaylist}> <input type="text" name='spotify_id' value={this.state.spotify_id} onChange={this.onChange} /> <button type="submit"> Submit </button> </form>
 
       </div>
     )
@@ -79,6 +77,7 @@ class Websocket extends React.Component {
 const mapStateToProps = (state, props) => {
   return {
     ...state,
+    topic_id: state.topicReducer.topic_id
   }
 }
 
