@@ -197,6 +197,18 @@ class Player extends React.Component {
       })
   }
 
+  testMs(){
+    this.player.getCurrentState().then(state => {
+      if (!state) {
+        console.error('User is not playing music through the Web Playback SDK');
+        return;
+      }
+      console.log(state.position);
+    });
+    // let data = this.player.getCurrentState()
+    // console.log(data)
+    // alert(data)
+  }
 
 
   render() {
@@ -225,6 +237,7 @@ class Player extends React.Component {
           <p>Artist: {artistName}</p>
           <p>Track: {trackName}</p>
           <p>Album: {albumName}</p>
+          <button onClick={()=>this.testMs()}>dont click me</button>
           <p>
             <PlayerControls
               playing={this.state.playing}

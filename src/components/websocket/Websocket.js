@@ -11,11 +11,12 @@ class Websocket extends React.Component {
     super(props);
     this.state = {
       isConnected: false,
-      playlist: '',
+      playlist: null,
       spotify_id: ''
     }
     this.onChange = this.onChange.bind(this);
     this.initializePlaylist = this.initializePlaylist.bind(this);
+    this.wsCheckInterval = null
 
     // ws.connect()
     // ws.on('close', () => {
@@ -25,7 +26,11 @@ class Websocket extends React.Component {
   }
 
   componentDidMount() {
-    //
+    this.addEventListeners(this.connect())
+  }
+
+  addEventListeners(player) {
+    player.on('message', e => console.log(e))
   }
 
   disconnect() {
@@ -38,16 +43,13 @@ class Websocket extends React.Component {
 
   connect() {
     ws.connect();
-    ws.onmessage = event => {
-      console.log("tomtomtom")
-    } 
     ws.on('open', () => {
       console.log("We've made it");
       this.setState({ isConnected: true });
     })
     const newPlaylist = ws.subscribe(`playlist:${this.props.topic_id}`)
-    console.log(newPlaylist)
-    this.setState({ playlist: newPlaylist });
+    this.setState({playlist: newPlaylist})
+    return newPlaylist
   }
 
   sendToAPI() {
