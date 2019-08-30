@@ -6,11 +6,7 @@ export default class Playlists extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      users: [{
-        display_name: 'Taylor',
-        topic_id: 1
-      }
-      ],
+      users: [],
       loaded: false
     }
   }
