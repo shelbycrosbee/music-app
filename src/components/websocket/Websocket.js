@@ -38,6 +38,9 @@ class Websocket extends React.Component {
 
   connect() {
     ws.connect();
+    ws.onmessage = event => {
+      console.log("tomtomtom")
+    } 
     ws.on('open', () => {
       console.log("We've made it");
       this.setState({ isConnected: true });
