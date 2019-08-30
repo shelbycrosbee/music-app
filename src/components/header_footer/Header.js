@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import LoginButton from '../login/LoginButton';
 import ReroutingButton from './ReroutingButton';
-import { Navbar, Nav, Button, Form, FormControl } from 'react-bootstrap'
+import { Navbar, Nav, Button, Form, FormControl, Image } from 'react-bootstrap'
+import logo from '../images/logo.svg'
 
 class Header extends Component {
   constructor(props) {
     super(props);
   }
+
+  
   render() {
     return (
     
         <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="#home"><ReroutingButton name='Home Page' redirectUrl='/home' />
+          <Navbar.Brand href="#home">
+          <Image src={logo} alt='logo'/>
+            <ReroutingButton name='Home Page' redirectUrl='/home' />
             </Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link><ReroutingButton name='Login' redirectUrl='/' /></Nav.Link>
