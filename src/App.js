@@ -19,7 +19,7 @@ function App() {
         <Route path="/player" component={PlayerPage} />
         <Route path="/playlists" component={PlaylistPage} />
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

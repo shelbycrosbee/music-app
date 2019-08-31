@@ -3,6 +3,8 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../../redux/action';
+import { faPlay, faPause, faForward, faBackward } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 class PlayerControls extends Component {
@@ -10,6 +12,7 @@ class PlayerControls extends Component {
     super(props);
     this.state={};
   }
+ 
   
   onPrevClick() {
     if(!this.props.player){
@@ -42,12 +45,17 @@ class PlayerControls extends Component {
     this.props.player.nextTrack();
   }
   render() {
+    const play = <FontAwesomeIcon icon={faPlay} />
+    const pause = <FontAwesomeIcon icon={faPause} />
+    const next = <FontAwesomeIcon icon={faForward} />
+    const previous = <FontAwesomeIcon icon={faBackward} />
+
     if(this.props.spotifyInit){
     return (
       <div>
-        <button onClick={() => this.onPrevClick()}>Previous</button>
-              <button onClick={() => this.onPlayClick()}>{this.props.playing ? "Pause" : "Play"}</button>
-              <button onClick={() => this.onNextClick()}>Next</button>
+        <button onClick={() => this.onPrevClick()}>{previous}</button>
+              <button onClick={() => this.onPlayClick()}>{this.props.playing ? pause : play}</button>
+              <button onClick={() => this.onNextClick()} >{next}</button>
               <button onClick={() => this.props.joinButton()}>Join</button>
 
       </div>
