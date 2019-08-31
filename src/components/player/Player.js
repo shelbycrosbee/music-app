@@ -198,6 +198,18 @@ class Player extends React.Component {
       })
   }
 
+  testMs(){
+    this.player.getCurrentState().then(state => {
+      if (!state) {
+        console.error('User is not playing music through the Web Playback SDK');
+        return;
+      }
+      console.log(state.position);
+    });
+    // let data = this.player.getCurrentState()
+    // console.log(data)
+    // alert(data)
+  }
 
 
   render() {

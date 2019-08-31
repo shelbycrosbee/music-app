@@ -9,7 +9,7 @@ export function login(user, token, history) {
       payload: {
         spotify_id: user.id,
         display_name: user.display_name,
-        profile_pic: user.images[0].url,
+        profile_pic: (user.images[0] ? user.images[0].url : 'https://icon-library.net/images/generic-user-icon/generic-user-icon-3.jpg'),
         token
       }
     })
