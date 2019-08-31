@@ -1,0 +1,25 @@
+.center{
+  text-align: center;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+.active{
+  background-color: rgb(132, 85, 177);
+  color: white;
+  font-size: 28px;
+}
+
+.your{
+  font-size: 28px;
+  color: rgb(132, 85, 177);
+}
+
+.redirect{
+  font-size: 20px;
+  background-color:#1a0526;
+  color: white
+}
+
+ul {
+  list-style: none
+}

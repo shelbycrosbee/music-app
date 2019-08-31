@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import PlaylistRedirectButton from './PlaylistRedirectButton'
 import { Accordion, Card } from 'react-bootstrap'
+import "./index.css"
 
 export default class Playlists extends Component {
   constructor(props) {
@@ -44,19 +45,19 @@ export default class Playlists extends Component {
       <>
         <Accordion>
           <Card>
-            <Accordion.Toggle as={Card.Header} eventKey="0">
+            <Accordion.Toggle as={Card.Header} eventKey="0" className="active">
               Active Users
-    </Accordion.Toggle>
+            </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
               <Card.Body><ul>{content}</ul></Card.Body>
             </Accordion.Collapse>
           </Card>
           <Card>
-            <Accordion.Toggle as={Card.Header} eventKey="1">
-              Your Playlists
-    </Accordion.Toggle>
+            <Accordion.Toggle as={Card.Header} eventKey="1" className="your">
+              Your Playlist
+            </Accordion.Toggle>
             <Accordion.Collapse eventKey="1">
-              <Card.Body>my playlist</Card.Body>
+              <Card.Body><button>start my playlist</button></Card.Body>
             </Accordion.Collapse>
           </Card>
 

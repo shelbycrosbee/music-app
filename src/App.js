@@ -6,6 +6,7 @@ import LoginPage from './components/login/LoginPage';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Footer from './components/header_footer/Footer';
 import PlaylistPage from './components/playlists/PlaylistPage';
+import Bio from './components/bios/Bio'
 
 
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/home" component={HomePage} />
         <Route path="/player" component={PlayerPage} />
         <Route path="/playlists" component={PlaylistPage} />
+        <Route path='/about' component={Bio} />
       </Switch>
       {/* <Footer /> */}
     </div>
