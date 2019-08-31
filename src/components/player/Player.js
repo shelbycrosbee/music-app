@@ -4,6 +4,7 @@ import PlayerControls from './PlayerControls';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../../redux/action';
+import { Row, Col } from 'react-bootstrap';
 
 
 class Player extends React.Component {
@@ -59,7 +60,7 @@ class Player extends React.Component {
       } = state.track_window;
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
-      const albumImage = currentTrack.album.images[1].url;
+      const albumImage = currentTrack.album.images[0].url;
       const artistName = currentTrack.artists
         .map(artist => artist.name)
         .join(", ");
@@ -220,12 +221,13 @@ class Player extends React.Component {
         </div>
 
         {error && <p>Error: {error}</p>}
-        <div>
-          <img src={albumImage} alt="album art" />
-          <p>Artist: {artistName}</p>
-          <p>Track: {trackName}</p>
-          <p>Album: {albumName}</p>
-          <p>
+        
+          <Row>
+          <Col xs={12} sm={6}><img src={albumImage} alt="album art" /></Col>
+          <Col>
+          <p><u>Artist</u>: {artistName}</p>
+          <p><u>Track</u>: {trackName}</p>
+          <p><u>Album</u>: {albumName}</p>
             <PlayerControls
               playing={this.state.playing}
               player={this.player}
@@ -233,8 +235,8 @@ class Player extends React.Component {
               joinButton={() => this.joinButton()}
               spotifyInit={this.state.spotifyInit}
             />
-          </p>
-        </div>
+          </Col>
+          </Row>
       </div>
     );
   }

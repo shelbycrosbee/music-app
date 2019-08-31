@@ -3,11 +3,10 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../../redux/action';
-import axios from 'axios';
-import ReroutingButton from '../header_footer/ReroutingButton';
 import Player from './Player';
-import { Row }  from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import Websocket from '../websocket/Websocket'
+import './index.css'
 
 
 
@@ -18,11 +17,22 @@ class PlayerPage extends Component {
 
   render() {
     return (
-      <Row className="justify-content-center">
-        <Player />
-        <Websocket />
-        {/* <img src={`${this.props.user.profile_pic}`}/> */}
-      </Row>
+      <>
+        {/* <Row className='center bodyText' >
+          <Col>
+            <Websocket />
+          </Col>
+        </Row> */}
+        <Row className='center bodyText' >
+          <Col sm={12}>
+            <Player />
+          </Col>
+          </Row>
+          <Row>
+          {/* <img src={`${this.props.user.profile_pic}`}/> */}
+          </Row>
+        
+      </>
     )
   }
 }

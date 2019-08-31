@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import './index.css'
+import { Row, Col, Button } from 'react-bootstrap';
 
 const CLIENT_ID = '1af7ab55e7e64df992dadf08719596ac';
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
@@ -17,9 +19,13 @@ const scopes = [
 export default class LoginButton extends Component {
   render() {
     return (
-      <div>
+      <Row  className='center'>
+        <Col>
+      <Button size="lg" variant='success'>
         <a href={`${authEndpoint}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}> Login </a>
-      </div>
+      </Button>
+      </Col>
+      </Row>
     )
   }
 }
