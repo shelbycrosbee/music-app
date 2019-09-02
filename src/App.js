@@ -21,7 +21,7 @@ function App() {
         <Route path="/playlists" component={PlaylistPage} />
         <Route path='/about' component={Bio} />
       </Switch>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

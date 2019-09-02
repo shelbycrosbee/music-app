@@ -3,6 +3,8 @@ import {
   Card,
   Button
 } from 'react-bootstrap'
+import './index.css'
+
 /*Required Local Props :
   --none
 Required Global Props :
@@ -19,7 +21,7 @@ class Footer extends Component {
     return (
 
 
-          <Card.Footer style={{bottom: 0, position: 'fixed', width: '100%'}}>Footer</Card.Footer>
+          <Card.Footer className='customBg'>Footer</Card.Footer>
      
 
     )

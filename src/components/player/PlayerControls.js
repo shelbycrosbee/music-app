@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import * as Actions from '../../redux/action';
 import { faPlay, faPause, faForward, faBackward } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from 'react-bootstrap'
+import './index.css'
 
 
 class PlayerControls extends Component {
@@ -53,10 +55,10 @@ class PlayerControls extends Component {
     if(this.props.spotifyInit){
     return (
       <div>
-        <button onClick={() => this.onPrevClick()}>{previous}</button>
-              <button onClick={() => this.onPlayClick()}>{this.props.playing ? pause : play}</button>
-              <button onClick={() => this.onNextClick()} >{next}</button>
-              <button onClick={() => this.props.joinButton()}>Join</button>
+        <Button className="button" onClick={() => this.onPrevClick()}>{previous}</Button>
+              <Button className='button' onClick={() => this.onPlayClick()}>{this.props.playing ? pause : play}</Button>
+              <Button className='button' onClick={() => this.onNextClick()} >{next}</Button>
+              <Button className='button' onClick={() => this.props.joinButton()}>Join</Button>
 
       </div>
     )}
