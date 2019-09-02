@@ -20,10 +20,16 @@ class Footer extends Component {
   render() {
     return (
 
-
-          <Card.Footer className='customBg'>Footer</Card.Footer>
+    //   <footer class="footer">
+    //   <div class="container">
+    //     <span class="text-muted">Place sticky footer content here.</span>
+    //   </div>
+    // </footer>
+      <Card>
+    
+        <Card.Footer className='customBg'>Footer</Card.Footer>
+       </Card>
      
-
     )
   }
 }

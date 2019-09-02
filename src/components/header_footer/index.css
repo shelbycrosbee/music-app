@@ -6,3 +6,13 @@
 .logo{
   height: 60px;
 }
+
+
+ 
+
+.footer {   
+  flex-shrink: 0; 
+  text-align: center;
+  background-color: rgb(106, 77, 133);
+
+}

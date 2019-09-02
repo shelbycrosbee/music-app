@@ -12,7 +12,7 @@ import Bio from './components/bios/Bio'
 
 function App() {
   return (
-    <div >
+    <div>
       <Header />
       <Switch>
         <Route exact path="/" component={LoginPage} />
@@ -21,7 +21,7 @@ function App() {
         <Route path="/playlists" component={PlaylistPage} />
         <Route path='/about' component={Bio} />
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
