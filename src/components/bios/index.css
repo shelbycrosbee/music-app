@@ -5,3 +5,14 @@
   margin-top: 50px;
 }
 
+
+.button{
+  background-color: rgb(132, 85, 177);
+  color: white;
+  font-size: 18px;
+}
+
+.cardForBio {
+  background-color: rgb(11, 1, 17);
+ 
+}
