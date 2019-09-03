@@ -18,11 +18,11 @@ class PlayerPage extends Component {
   render() {
     return (
       <>
-        {/* <Row className='center bodyText' >
+        <Row className='center bodyText' >
           <Col>
             <Websocket />
           </Col>
-        </Row> */}
+        </Row>
         <Row className='center bodyText' >
           <Col sm={12}>
             <Player />

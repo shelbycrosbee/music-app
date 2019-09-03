@@ -235,7 +235,7 @@ class Player extends React.Component {
         {error && <p>Error: {error}</p>}
         
           <Row>
-          <Col xs={12} sm={6}><img src={albumImage} alt="album art" /></Col>
+          <Col xs={12} sm={8}><img src={albumImage} alt="album art" /></Col>
           <Col>
           <p><u>Artist</u>: {artistName}</p>
           <p><u>Track</u>: {trackName}</p>

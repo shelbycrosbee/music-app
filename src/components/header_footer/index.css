@@ -8,11 +8,16 @@
 }
 
 
- 
+.clear { clear: both; height: 20px; }
 
-.footer {   
-  flex-shrink: 0; 
-  text-align: center;
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: .5rem;
   background-color: rgb(106, 77, 133);
-
+  color: rgba(0,0,0,.5);
+  text-align: center;
 }

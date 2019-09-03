@@ -25,10 +25,10 @@ class Footer extends Component {
     //     <span class="text-muted">Place sticky footer content here.</span>
     //   </div>
     // </footer>
-      <Card>
-    
-        <Card.Footer className='customBg'>Footer</Card.Footer>
-       </Card>
+      <div>
+        <div className='clear'></div>
+        <footer className='footer'>Footer</footer>
+       </div>
      
     )
   }

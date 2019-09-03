@@ -43,7 +43,7 @@ export default class Playlists extends Component {
 
     return (
       <>
-        <Accordion>
+        <Accordion defaultActiveKey="0">
           <Card>
             <Accordion.Toggle as={Card.Header} eventKey="0" className="active">
               Active Users

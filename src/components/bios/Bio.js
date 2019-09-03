@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import './index.css'
-import { Row, Col, Card, Button } from 'react-bootstrap';
+import { Row, Col, Card, Button, Container } from 'react-bootstrap';
 import shelby from '../images/shelby.jpg'
 
 export default class Bio extends Component {
   render() {
     return (
+   
       <Row className='text'>
         <Col className='text'>Chris Cozlick</Col>
         <Col className='text'>Sara Lewis</Col>
@@ -26,6 +27,8 @@ export default class Bio extends Component {
         <Col className='text'>Taylor Warren</Col>
         <Col className='text'>Tom Bawel</Col>
       </Row>
+     
+   
     )
   }
 }
