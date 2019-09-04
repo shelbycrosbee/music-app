@@ -115,7 +115,7 @@ class Player extends React.Component {
       url: "https://api.spotify.com/v1/me/player",
       data: {
         device_ids: [deviceId],
-        play: true
+        play: false
       },
       headers: {
         Authorization: `${this.props.token}`
@@ -177,10 +177,11 @@ class Player extends React.Component {
         return;
       }
       // console.log(state.track_window)
-      console.log(state.context.metadata)
+      console.log((state.track_window.previous_tracks.length ? state.track_window.previous_tracks.length : 0))
       return {
         progress_ms: state.position,
-        currentTrack: state.track_window.current_track.uri
+        playlist_uri: state.context.uri,
+        position: (state.track_window.previous_tracks.length ? state.track_window.previous_tracks.length : 0)
       }
     });
   }
@@ -212,6 +213,7 @@ class Player extends React.Component {
             <Websocket
               getPosition={() => this.getPosition()}
               player={this.player}
+              spotifyInit={this.state.spotifyInit}
             />
           </Col>
         </Row>

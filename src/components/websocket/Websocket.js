@@ -27,29 +27,43 @@ class Websocket extends React.Component {
   }
 
   componentDidMount() {
+    //
     this.addEventListeners(this.connect())
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     this.addEventListeners(this.state.playlist)
-
+    this.onJoin();
   }
 
   addEventListeners(playlist) {
-    if(this.props.player && !this.state.playerReady){
+    if (this.props.player && !this.state.playerReady) {
       // debugger; 
-    this.setState({
-      playerReady: true
-    })
-    playlist.on('message', ()=>this.props.getPosition())
-    playlist.on('start', data => {
-      //start player
-      
-    })
+      this.setState({
+        playerReady: true
+      })
+      playlist.on('message', () => this.props.getPosition())
+      playlist.on('donde', (friend_id) => {
+        let playlist_data = this.props.getPosition();
+        //api call to websocket
+        this.state.playlist.emit('givePosition', { playlist: playlist_data, friend_id });
+      })
     }
   }
 
-  
+  onJoin() {
+    if (this.props.topic_id === this.props.spotify_id) {
+      //start playing
+      this.props.player.togglePlay();
+    }
+    else {
+      if (this.props.spotifyInit) {
+        this.state.playlist.emit('aqui', { topic_id: this.props.topic_id });
+      }
+    }
+  }
+
+
 
   disconnect() {
     ws.close()
@@ -66,7 +80,8 @@ class Websocket extends React.Component {
       this.setState({ isConnected: true });
     })
     const newPlaylist = ws.subscribe(`playlist:${this.props.topic_id}`)
-    this.setState({playlist: newPlaylist})
+    this.initializePlaylist({spotify_id: this.props.spotify_id, topic_id: this.props.topic_id});
+    this.setState({ playlist: newPlaylist })
     return newPlaylist
   }
 
@@ -74,8 +89,7 @@ class Websocket extends React.Component {
     this.state.playlist.emit('singleSend', { spotify_id: 1, topic_id: "soup" });
   }
 
-  initializePlaylist(e) {
-    e.preventDefault();
+  initializePlaylist() {
     this.state.playlist.emit('initialize', { spotify_id: this.state.spotify_id, topic_id: this.props.topic_id })
   }
 
@@ -100,6 +114,7 @@ class Websocket extends React.Component {
 const mapStateToProps = (state, props) => {
   return {
     ...state,
+    spotify_id: state.userReducer.spotify_id,
     topic_id: state.topicReducer.topic_id
   }
 }
