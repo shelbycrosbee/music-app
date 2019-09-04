@@ -12,7 +12,8 @@ class Websocket extends React.Component {
     this.state = {
       isConnected: false,
       playlist: null,
-      spotify_id: ''
+      spotify_id: '',
+      playerReady: false
     }
     this.onChange = this.onChange.bind(this);
     this.initializePlaylist = this.initializePlaylist.bind(this);
@@ -29,9 +30,26 @@ class Websocket extends React.Component {
     this.addEventListeners(this.connect())
   }
 
-  addEventListeners(player) {
-    player.on('message', e => console.log(e))
+  componentDidUpdate(){
+    this.addEventListeners(this.state.playlist)
+
   }
+
+  addEventListeners(playlist) {
+    if(this.props.player && !this.state.playerReady){
+      // debugger; 
+    this.setState({
+      playerReady: true
+    })
+    playlist.on('message', ()=>this.props.getPosition())
+    playlist.on('start', data => {
+      //start player
+      
+    })
+    }
+  }
+
+  
 
   disconnect() {
     ws.close()

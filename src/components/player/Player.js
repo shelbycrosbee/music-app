@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../../redux/action';
 import { Row, Col } from 'react-bootstrap';
+import Websocket from '../websocket/Websocket'
+import { statement } from '@babel/template';
 
 
 class Player extends React.Component {
@@ -139,40 +141,10 @@ class Player extends React.Component {
 
   }
 
-  async joinSpotifyPlaylist(playlist) {
-    // const { deviceId } = this.state;
-    // console.log(playlist.uri_link)
-    // await axios({
-    //   method: 'put',
-    //   url: "https://api.spotify.com/v1/me/player/play",
-    //   data: {
-    //     device_ids: [deviceId],
-    //     play: true,
-    //     context_uri: playlist.uri_link,
-    //     offset: {
-    //       position: playlist.position
-    //     },
-    //     position_ms: playlist.progress_ms
-    //   },
-    //   headers: {
-    //     Authorization: `${this.props.token}`
-    //   }
-    // })
-    //   .then(response => {
-    //     console.log(response)
-    //   })
-    //   .catch(error => {
-    //     console.log(error)
-    //   })
-  }
 
-  async joinButton() {
+
+  async joinPlaylist() {
     const { deviceId } = this.state;
-    // const spotify_id = 'join'
-    // const data = await axios.get('/playlist', {
-    //   params: { spotify_id: spotify_id }
-    // })
-    console.log(this.props.playlist)
     await axios({
       method: 'put',
       url: "https://api.spotify.com/v1/me/player/play",
@@ -198,17 +170,19 @@ class Player extends React.Component {
       })
   }
 
-  testMs(){
+  getPosition() {
     this.player.getCurrentState().then(state => {
       if (!state) {
         console.error('User is not playing music through the Web Playback SDK');
         return;
       }
-      console.log(state.position);
+      // console.log(state.track_window)
+      console.log(state.context.metadata)
+      return {
+        progress_ms: state.position,
+        currentTrack: state.track_window.current_track.uri
+      }
     });
-    // let data = this.player.getCurrentState()
-    // console.log(data)
-    // alert(data)
   }
 
 
@@ -233,13 +207,22 @@ class Player extends React.Component {
         </div>
 
         {error && <p>Error: {error}</p>}
-        
-          <Row>
-          <Col xs={12} sm={8}><img src={albumImage} alt="album art" /></Col>
+        <Row className='center bodyText' >
           <Col>
-          <p><u>Artist</u>: {artistName}</p>
-          <p><u>Track</u>: {trackName}</p>
-          <p><u>Album</u>: {albumName}</p>
+            <Websocket
+              getPosition={() => this.getPosition()}
+              player={this.player}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <button onClick={() => this.getPosition()}>don't click me</button>
+
+          {/* <Col xs={12} sm={8}><img src={albumImage} alt="album art" /></Col> */}
+          <Col>
+            <p><u>Artist</u>: {artistName}</p>
+            <p><u>Track</u>: {trackName}</p>
+            <p><u>Album</u>: {albumName}</p>
             <PlayerControls
               playing={this.state.playing}
               player={this.player}
@@ -248,7 +231,7 @@ class Player extends React.Component {
               spotifyInit={this.state.spotifyInit}
             />
           </Col>
-          </Row>
+        </Row>
       </div>
     );
   }
