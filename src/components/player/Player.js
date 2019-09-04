@@ -7,6 +7,7 @@ import * as Actions from '../../redux/action';
 import { Row, Col } from 'react-bootstrap';
 import Websocket from '../websocket/Websocket'
 import { statement } from '@babel/template';
+import Playlists from '../playlists/Playlists'
 
 
 class Player extends React.Component {
@@ -34,6 +35,10 @@ class Player extends React.Component {
       this.checkForPlayer();
     }
     this.checkForPlayer();
+  }
+
+  componentWillUnmount() {
+    this.player.disconnect();
   }
 
 
@@ -115,7 +120,7 @@ class Player extends React.Component {
       url: "https://api.spotify.com/v1/me/player",
       data: {
         device_ids: [deviceId],
-        play: false
+        play: true
       },
       headers: {
         Authorization: `${this.props.token}`
@@ -143,7 +148,7 @@ class Player extends React.Component {
 
 
 
-  async joinPlaylist() {
+  async joinPlaylist(playlist_data) {
     const { deviceId } = this.state;
     await axios({
       method: 'put',
@@ -151,12 +156,12 @@ class Player extends React.Component {
       data: {
         device_ids: [deviceId],
         play: true,
-        context_uri: `spotify:playlist:${this.props.playlist.uri_link}`,
+        context_uri: `spotify:playlist:${this.props.playlist_data.playlist_uri}`,
         offset: {
-          position: this.props.playlist.position
+          position: this.props.playlist_data.position
         },
 
-        position_ms: this.props.playlist.progress_ms
+        position_ms: this.props.playlist_data.progress_ms
       },
       headers: {
         Authorization: `${this.props.token}`
@@ -200,10 +205,8 @@ class Player extends React.Component {
       playing,
     } = this.state;
 
-
-
-    return (
-      <div className="">
+    let playerOrPlaylists = (this.props.topic_id ?
+      <>
         <div>
           <h3>Code School Spotify Player</h3>
         </div>
@@ -215,14 +218,16 @@ class Player extends React.Component {
               getPosition={() => this.getPosition()}
               player={this.player}
               spotifyInit={this.state.spotifyInit}
+              joinPlaylist={() => this.joinPlaylist()}
             />
           </Col>
         </Row>
         <Row>
-          <button onClick={() => this.getPosition()}>don't click me</button>
+          {/*<button onClick={() => this.getPosition()}>don't click me</button>*/}
 
           {/* <Col xs={12} sm={8}><img src={albumImage} alt="album art" /></Col> */}
           <Col>
+            <img src={albumImage} />
             <p><u>Artist</u>: {artistName}</p>
             <p><u>Track</u>: {trackName}</p>
             <p><u>Album</u>: {albumName}</p>
@@ -235,6 +240,16 @@ class Player extends React.Component {
             />
           </Col>
         </Row>
+      </>
+      :
+      <Playlists />
+    );
+
+
+    return (
+
+      <div className="">
+        {playerOrPlaylists}
       </div>
     );
   }
@@ -246,7 +261,8 @@ const mapStateToProps = (state, props) => {
     user: state.userReducer,
     token: state.tokenReducer.token,
     token_init: state.tokenReducer.token_init,
-    playlist: state.playlistReducer
+    playlist: state.playlistReducer,
+    topic_id: state.topicReducer.topic_id
   }
 }
 

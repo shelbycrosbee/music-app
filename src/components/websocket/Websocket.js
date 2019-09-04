@@ -16,7 +16,7 @@ class Websocket extends React.Component {
       playerReady: false,
       mayIAsk: true,
     }
-    this.onChange = this.onChange.bind(this);
+    // this.onChange = this.onChange.bind(this);
     this.initializePlaylist = this.initializePlaylist.bind(this);
     this.wsCheckInterval = null
 
@@ -34,9 +34,9 @@ class Websocket extends React.Component {
 
   componentDidUpdate() {
     this.addEventListeners(this.state.playlist)
-    if(this.state.mayIAsk){
-    this.onJoin();
-    this.setState({mayIAsk: false})
+    if (this.state.mayIAsk) {
+      this.onJoin();
+      this.setState({ mayIAsk: false })
     }
   }
 
@@ -49,9 +49,12 @@ class Websocket extends React.Component {
       // playlist.on('message', () => this.props.getPosition())
       playlist.on('donde', async (data) => {
         const playlist_data = await this.props.getPosition();
-        console.log('Blasted Tarnation: '+playlist_data)
         //api call to websocket
         this.state.playlist.emit('givePosition', { playlist: playlist_data, friend_id: data.friend_id });
+      })
+
+      playlist.on('join', (playlist_data) => {
+
       })
     }
   }
@@ -59,7 +62,6 @@ class Websocket extends React.Component {
   onJoin() {
     if ((this.props.topic_id === this.props.spotify_id) && this.props.spotifyInit) {
       //start playing
-      console.log('TTTTTTT')
       this.props.player.togglePlay();
     }
     else {
@@ -79,6 +81,10 @@ class Websocket extends React.Component {
     })
   }
 
+  componentWillUnmount() {
+    ws.close();
+  }
+
   connect() {
     ws.connect();
     ws.on('open', () => {
@@ -91,26 +97,26 @@ class Websocket extends React.Component {
     return newPlaylist
   }
 
-  sendToAPI() {
-    this.state.playlist.emit('singleSend', { spotify_id: 1, topic_id: "soup" });
-  }
+  // sendToAPI() {
+  //   this.state.playlist.emit('singleSend', { spotify_id: 1, topic_id: "soup" });
+  // }
 
   initializePlaylist(playlist) {
     playlist.emit('initialize', { spotify_id: this.props.spotify_id, topic_id: this.props.topic_id })
   }
 
-  onChange(e) {
-    this.setState({ spotify_id: e.target.value })
-  }
+  // onChange(e) {
+  //   this.setState({ spotify_id: e.target.value })
+  // }
 
   render() {
     return (
       <div>
-        <p> Connected: {(this.state.isConnected ? 'True' : 'False')}</p>
+        {/*<p> Connected: {(this.state.isConnected ? 'True' : 'False')}</p>
         <button onClick={() => this.connect()}> Connect? </button>
         <button onClick={() => this.disconnect()}> Disconnect! </button>
         <button onClick={() => this.sendToAPI()} > Send </button>
-        <form onSubmit={this.initializePlaylist}> <input type="text" name='spotify_id' value={this.state.spotify_id} onChange={this.onChange} /> <button type="submit"> Submit </button> </form>
+    <form onSubmit={this.initializePlaylist}> <input type="text" name='spotify_id' value={this.state.spotify_id} onChange={this.onChange} /> <button type="submit"> Submit </button> </form>*/}
 
       </div>
     )
