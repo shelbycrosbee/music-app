@@ -171,19 +171,20 @@ class Player extends React.Component {
   }
 
   getPosition() {
-    this.player.getCurrentState().then(state => {
+    return this.player.getCurrentState().then(state => {
       if (!state) {
         console.error('User is not playing music through the Web Playback SDK');
         return;
       }
-      // console.log(state.track_window)
-      console.log((state.track_window.previous_tracks.length ? state.track_window.previous_tracks.length : 0))
-      return {
+      console.log("TIWAODSNDSF")
+      let playlistInfo = {
         progress_ms: state.position,
         playlist_uri: state.context.uri,
         position: (state.track_window.previous_tracks.length ? state.track_window.previous_tracks.length : 0)
       }
-    });
+      return playlistInfo;
+      ;
+    })
   }
 
 

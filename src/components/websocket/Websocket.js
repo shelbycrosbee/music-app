@@ -13,7 +13,8 @@ class Websocket extends React.Component {
       isConnected: false,
       playlist: null,
       spotify_id: '',
-      playerReady: false
+      playerReady: false,
+      mayIAsk: true,
     }
     this.onChange = this.onChange.bind(this);
     this.initializePlaylist = this.initializePlaylist.bind(this);
@@ -33,7 +34,10 @@ class Websocket extends React.Component {
 
   componentDidUpdate() {
     this.addEventListeners(this.state.playlist)
+    if(this.state.mayIAsk){
     this.onJoin();
+    this.setState({mayIAsk: false})
+    }
   }
 
   addEventListeners(playlist) {
@@ -42,18 +46,20 @@ class Websocket extends React.Component {
       this.setState({
         playerReady: true
       })
-      playlist.on('message', () => this.props.getPosition())
-      playlist.on('donde', (friend_id) => {
-        let playlist_data = this.props.getPosition();
+      // playlist.on('message', () => this.props.getPosition())
+      playlist.on('donde', async (data) => {
+        const playlist_data = await this.props.getPosition();
+        console.log('Blasted Tarnation: '+playlist_data)
         //api call to websocket
-        this.state.playlist.emit('givePosition', { playlist: playlist_data, friend_id });
+        this.state.playlist.emit('givePosition', { playlist: playlist_data, friend_id: data.friend_id });
       })
     }
   }
 
   onJoin() {
-    if (this.props.topic_id === this.props.spotify_id) {
+    if ((this.props.topic_id === this.props.spotify_id) && this.props.spotifyInit) {
       //start playing
+      console.log('TTTTTTT')
       this.props.player.togglePlay();
     }
     else {
@@ -80,7 +86,7 @@ class Websocket extends React.Component {
       this.setState({ isConnected: true });
     })
     const newPlaylist = ws.subscribe(`playlist:${this.props.topic_id}`)
-    this.initializePlaylist({spotify_id: this.props.spotify_id, topic_id: this.props.topic_id});
+    this.initializePlaylist(newPlaylist);
     this.setState({ playlist: newPlaylist })
     return newPlaylist
   }
@@ -89,8 +95,8 @@ class Websocket extends React.Component {
     this.state.playlist.emit('singleSend', { spotify_id: 1, topic_id: "soup" });
   }
 
-  initializePlaylist() {
-    this.state.playlist.emit('initialize', { spotify_id: this.state.spotify_id, topic_id: this.props.topic_id })
+  initializePlaylist(playlist) {
+    playlist.emit('initialize', { spotify_id: this.props.spotify_id, topic_id: this.props.topic_id })
   }
 
   onChange(e) {
