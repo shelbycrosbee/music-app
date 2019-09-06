@@ -16,7 +16,7 @@ class Header extends Component {
 
       <Navbar className="customBg" expand='sm'>
         <Navbar.Brand href="#home">
-          <Logo/>
+          <Logo />
           {/* <ReroutingButton name='Home Page' redirectUrl='/home' /> */}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -24,7 +24,7 @@ class Header extends Component {
           <Nav className="mr-auto">
             <Nav.Link><ReroutingButton name='Login' redirectUrl='/' /></Nav.Link>
             <Nav.Link><ReroutingButton name='Player' redirectUrl='/player' /></Nav.Link>
-            {/* <Nav.Link><ReroutingButton name='Playlists' redirectUrl='/playlists' /></Nav.Link> */}
+            <Nav.Link><ReroutingButton name='Playlists' redirectUrl='/playlists' /></Nav.Link>
             <Nav.Link><ReroutingButton name='The Makers' redirectUrl='/about' /></Nav.Link>
           </Nav>
         </Navbar.Collapse>

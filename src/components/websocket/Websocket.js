@@ -53,22 +53,24 @@ class Websocket extends React.Component {
         this.state.playlist.emit('givePosition', { playlist: playlist_data, friend_id: data.friend_id });
       })
 
-      playlist.on('join', (playlist_data) => {
-
+      playlist.on('giveMeMoney', async (playlist_data) => {
+        debugger;
+        console.log(playlist_data);
+        this.props.joinPlaylist(playlist_data);
       })
     }
   }
 
   onJoin() {
-    if ((this.props.topic_id === this.props.spotify_id) && this.props.spotifyInit) {
-      //start playing
-      this.props.player.togglePlay();
-    }
-    else {
-      if (this.props.spotifyInit) {
-        this.state.playlist.emit('aqui', { topic_id: this.props.topic_id });
-      }
-    }
+    // if ((this.props.topic_id === this.props.spotify_id) && this.props.spotifyInit) {
+    //   //start playing
+    //   this.props.player.togglePlay();
+    // }
+    // else {
+    //   if (this.props.spotifyInit) {
+    this.state.playlist.emit('aqui', { topic_id: this.props.topic_id });
+    //   }
+    // }
   }
 
 

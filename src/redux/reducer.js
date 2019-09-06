@@ -48,7 +48,7 @@ const playlistReducer = function (state = initialPlaylistState, action) {
     case STORE_PLAYLIST: {
       return {
         ...state,
-        uri_link: action.payload.uri_link,
+        playlist_uri: action.payload.playlist_uri,
         position: action.payload.position,
         progress_ms: action.payload.progress_ms
       }
@@ -58,7 +58,7 @@ const playlistReducer = function (state = initialPlaylistState, action) {
   }
 }
 
-const topicReducer = function ( state = {topic_id: ''}, action) {
+const topicReducer = function (state = { topic_id: '' }, action) {
   switch (action.type) {
     case STORE_TOPIC: {
       return {

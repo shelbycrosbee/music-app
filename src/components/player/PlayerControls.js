@@ -10,16 +10,16 @@ import './index.css'
 
 
 class PlayerControls extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={};
+    this.state = {};
   }
- 
-  
+
+
   onPrevClick() {
-    if(!this.props.player){
+    if (!this.props.player) {
       this.props.checkForPlayer()
-    } 
+    }
     else {
 
       this.props.player.previousTrack();
@@ -51,19 +51,21 @@ class PlayerControls extends Component {
     const pause = <FontAwesomeIcon icon={faPause} />
     const next = <FontAwesomeIcon icon={faForward} />
     const previous = <FontAwesomeIcon icon={faBackward} />
+    const joinButton = (this.props.owner ? <Button className='button' onClick={() => this.props.joinSelfButton()}>Restart Playlist</Button> : <Button className='button'>Sync</Button>);
 
-    if(this.props.spotifyInit){
-    return (
-      <div>
-        <Button className="button" onClick={() => this.onPrevClick()}>{previous}</Button>
-              <Button className='button' onClick={() => this.onPlayClick()}>{this.props.playing ? pause : play}</Button>
-              <Button className='button' onClick={() => this.onNextClick()} >{next}</Button>
-              <Button className='button' onClick={() => this.props.joinButton()}>Join</Button>
+    if (this.props.spotifyInit) {
+      return (
+        <div>
+          <Button className="button" onClick={() => this.onPrevClick()}>{previous}</Button>
+          <Button className='button' onClick={() => this.onPlayClick()}>{this.props.playing ? pause : play}</Button>
+          <Button className='button' onClick={() => this.onNextClick()} >{next}</Button>
+          {joinButton}
 
       </div>
-    )}
+      )
+    }
     else {
-      return(
+      return (
         <p>Loading</p>
       )
     }

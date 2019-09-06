@@ -3,8 +3,12 @@ import axios from 'axios';
 import PlaylistRedirectButton from './PlaylistRedirectButton'
 import { Accordion, Card } from 'react-bootstrap'
 import "./index.css"
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as Actions from '../../redux/action';
+import { withRouter } from 'react-router-dom'
 
-export default class Playlists extends Component {
+class Playlists extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -30,10 +34,15 @@ export default class Playlists extends Component {
 
   }
 
+  async getMyPlaylist() {
+    this.props.getPlaylist()
+    this.props.storeTopic(this.props.user.spotify_id)
+    this.props.history.push('/player')
+  }
+
   render() {
     let content = <p>loading</p>
     if (this.state.loaded) {
-      console.log(this.state.users)
       let usersList = this.state.users.map(user => {
         return <li><PlaylistRedirectButton topic_id={user.topic_id} display_name={user.display_name} /></li>
       })
@@ -54,10 +63,10 @@ export default class Playlists extends Component {
           </Card>
           <Card>
             <Accordion.Toggle as={Card.Header} eventKey="1" className="your">
-              Your Playlist
+              {this.props.user.display_name}'s Playlist
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="1">
-              <Card.Body><button>start my playlist</button></Card.Body>
+              <Card.Body><button onClick={() => this.getMyPlaylist()}>start saved playlist</button></Card.Body>
             </Accordion.Collapse>
           </Card>
 
@@ -68,3 +77,22 @@ export default class Playlists extends Component {
   }
 
 }
+
+const mapStateToProps = (state, props) => {
+  return {
+    ...state,
+    user: state.userReducer,
+    token: state.tokenReducer.token,
+    token_init: state.tokenReducer.token_init,
+    playlist: state.playlistReducer,
+    topic_id: state.topicReducer.topic_id,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return (
+    bindActionCreators(Actions, dispatch)
+  )
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Playlists));

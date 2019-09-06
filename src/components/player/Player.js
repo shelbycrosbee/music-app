@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 import * as Actions from '../../redux/action';
 import { Row, Col } from 'react-bootstrap';
 import Websocket from '../websocket/Websocket'
-import { statement } from '@babel/template';
 import Playlists from '../playlists/Playlists'
 
 
@@ -23,7 +22,8 @@ class Player extends React.Component {
       playing: false,
       position: 0,
       duration: 0,
-      spotifyInit: false
+      spotifyInit: false,
+      joinedMyPlaylist: false
     };
     this.checkForPlayer = this.checkForPlayer.bind(this);
   }
@@ -31,25 +31,46 @@ class Player extends React.Component {
 
 
   componentDidMount() {
+
     window.onSpotifyWebPlaybackSDKReady = () => {
       this.checkForPlayer();
     }
     this.checkForPlayer();
+
+    axios.put(`${process.env.REACT_APP_API_URL}users/toggleActive`, {
+      spotify_id: this.props.user.spotify_id
+    })
+
+    axios.put(`${process.env.REACT_APP_API_URL}users/setTopicID`, {
+      spotify_id: this.props.user.spotify_id,
+      topic_id: this.props.topic_id
+    })
+
   }
 
   componentWillUnmount() {
+    this.setState({ joinedMyPlaylist: false })
     this.player.disconnect();
+    axios.put(`${process.env.REACT_APP_API_URL}users/toggleActive`, {
+      spotify_id: this.props.user.spotify_id
+    })
+  }
+
+  componentDidUpdate() {
+    // if (this.props.user.spotify_id === this.props.topic_id && this.state.spotifyInit) {
+    //   this.joinPlaylist(this.props.playlist);
+    // }
   }
 
 
-  checkForPlayer() {
+  async checkForPlayer() {
     if (window.Spotify !== undefined) {
       this.player = new window.Spotify.Player({
         name: "Code School's Spotify Player",
         getOAuthToken: cb => { cb(this.props.token_init); },
       });
       this.createEventHandlers();
-      this.player.connect();
+      await this.player.connect();
       this.setState({
         spotifyInit: true
       })
@@ -105,9 +126,9 @@ class Player extends React.Component {
 
     this.player.on('ready', async data => {
       let { device_id } = data;
-      console.log("Let the music play on!");
+      console.log("Let the music play on twice!");
       await this.setState({ deviceId: device_id });
-      this.transferPlaybackHere();
+      await this.transferPlaybackHere();
     });
   }
 
@@ -156,12 +177,12 @@ class Player extends React.Component {
       data: {
         device_ids: [deviceId],
         play: true,
-        context_uri: `spotify:playlist:${this.props.playlist_data.playlist_uri}`,
+        context_uri: `spotify:playlist:${playlist_data.playlist_uri}`,
         offset: {
-          position: this.props.playlist_data.position
+          position: (playlist_data.position ? playlist_data.position : 0)
         },
 
-        position_ms: this.props.playlist_data.progress_ms
+        position_ms: (playlist_data.progress_ms ? playlist_data.progress_ms : 0)
       },
       headers: {
         Authorization: `${this.props.token}`
@@ -205,6 +226,7 @@ class Player extends React.Component {
       playing,
     } = this.state;
 
+    
     let playerOrPlaylists = (this.props.topic_id ?
       <>
         <div>
@@ -235,8 +257,9 @@ class Player extends React.Component {
               playing={this.state.playing}
               player={this.player}
               checkForPlayer={() => this.checkForPlayer()}
-              joinButton={() => this.joinButton()}
+              joinSelfButton={() => this.joinPlaylist(this.props.playlist)}
               spotifyInit={this.state.spotifyInit}
+              owner={this.props.topic_id === this.props.user.spotify_id}
             />
           </Col>
         </Row>
@@ -262,7 +285,7 @@ const mapStateToProps = (state, props) => {
     token: state.tokenReducer.token,
     token_init: state.tokenReducer.token_init,
     playlist: state.playlistReducer,
-    topic_id: state.topicReducer.topic_id
+    topic_id: state.topicReducer.topic_id,
   }
 }
 
