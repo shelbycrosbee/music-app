@@ -21,7 +21,9 @@ const userReducer = function (state = initialUserState, action) {
         ...state,
         display_name: action.payload.display_name,
         spotify_id: action.payload.spotify_id,
-        profile_pic: action.payload.profile_pic
+        profile_pic: action.payload.profile_pic,
+        active: action.payload.active,
+        premium: action.payload.premium,
       }
     }
     default:

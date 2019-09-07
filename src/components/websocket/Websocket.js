@@ -42,11 +42,9 @@ class Websocket extends React.Component {
 
   addEventListeners(playlist) {
     if (this.props.player && !this.state.playerReady) {
-      // debugger; 
       this.setState({
         playerReady: true
       })
-      // playlist.on('message', () => this.props.getPosition())
       playlist.on('donde', async (data) => {
         const playlist_data = await this.props.getPosition();
         //api call to websocket
@@ -55,7 +53,7 @@ class Websocket extends React.Component {
 
       playlist.on('join', async (playlist_data) => {
         console.log(playlist_data);
-        playlist_data.progress_ms = parseInt(playlist_data.progress_ms) - parseInt(playlist_data.join_time) + Date.now() + 3000;
+        playlist_data.progress_ms = parseInt(playlist_data.progress_ms) - parseInt(playlist_data.join_time) + Date.now();
         this.props.storePlaylistMS(playlist_data.progress_ms);
         this.props.joinPlaylist(playlist_data);
       })
@@ -100,23 +98,17 @@ class Websocket extends React.Component {
     return newPlaylist
   }
 
-  // sendToAPI() {
-  //   this.state.playlist.emit('singleSend', { spotify_id: 1, topic_id: "soup" });
-  // }
+
 
   initializePlaylist(playlist) {
     playlist.emit('initialize', { spotify_id: this.props.spotify_id, topic_id: this.props.topic_id })
   }
 
-  // onChange(e) {
-  //   this.setState({ spotify_id: e.target.value })
-  // }
 
   render() {
     return (
       <div>
         <button onClick={()=>this.onJoin()}>onJoin</button>
-
       </div>
     )
   }

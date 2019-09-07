@@ -10,19 +10,24 @@ export function login(user, token, history) {
         spotify_id: user.id,
         display_name: user.display_name,
         profile_pic: (user.images[0] ? user.images[0].url : 'https://icon-library.net/images/generic-user-icon/generic-user-icon-3.jpg'),
-        token
+        token,
+        active: false,
+        premium: (user.product === 'premium' ? 1 : 0),
       }
     })
   }
 }
 
-export function register({ spotify_id }) {
+export function register() {
   return async function (dispatch, getState) {
     try {
       const currentState = getState();
       console.log(currentState)
       await axios.post(`${process.env.REACT_APP_API_URL}user`, {
-        spotify_id: currentState.userReducer.spotify_id
+        spotify_id: currentState.userReducer.spotify_id,
+        active: currentState.userReducer.active,
+        premium: currentState.userReducer.premium,
+        display_name: currentState.userReducer.display_name
       })
       dispatch({
         type: REGISTER
