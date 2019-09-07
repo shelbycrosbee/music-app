@@ -46,6 +46,8 @@ class PlayerControls extends Component {
   onNextClick() {
     this.props.player.nextTrack();
   }
+
+
   render() {
     const play = <FontAwesomeIcon icon={faPlay} />
     const pause = <FontAwesomeIcon icon={faPause} />

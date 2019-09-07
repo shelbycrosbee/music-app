@@ -55,6 +55,8 @@ class Websocket extends React.Component {
 
       playlist.on('join', async (playlist_data) => {
         console.log(playlist_data);
+        playlist_data.progress_ms = parseInt(playlist_data.progress_ms) - parseInt(playlist_data.join_time) + Date.now() + 3000;
+        this.props.storePlaylistMS(playlist_data.progress_ms);
         this.props.joinPlaylist(playlist_data);
       })
     }
@@ -114,11 +116,6 @@ class Websocket extends React.Component {
     return (
       <div>
         <button onClick={()=>this.onJoin()}>onJoin</button>
-        {/*<p> Connected: {(this.state.isConnected ? 'True' : 'False')}</p>
-        <button onClick={() => this.connect()}> Connect? </button>
-        <button onClick={() => this.disconnect()}> Disconnect! </button>
-        <button onClick={() => this.sendToAPI()} > Send </button>
-    <form onSubmit={this.initializePlaylist}> <input type="text" name='spotify_id' value={this.state.spotify_id} onChange={this.onChange} /> <button type="submit"> Submit </button> </form>*/}
 
       </div>
     )

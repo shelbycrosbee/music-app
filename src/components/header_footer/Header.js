@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ReroutingButton from './ReroutingButton';
 import './index.css'
-import { Navbar, Nav, Image } from 'react-bootstrap'
+import { Navbar, Nav } from 'react-bootstrap'
 import Logo from './Logo';
+import { withRouter } from 'react-router-dom';
 
 class Header extends Component {
   constructor(props) {
@@ -14,24 +15,24 @@ class Header extends Component {
   render() {
     return (
 
-      <Navbar className="customBg" expand='sm'>
+      <Navbar collapseOnSelect className="customBg" expand='sm'>
         <Navbar.Brand href="#home">
           <Logo />
-          {/* <ReroutingButton name='Home Page' redirectUrl='/home' /> */}
+          {/* <ReroutingButton name='Home Page' url='/home' /> */}
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link><ReroutingButton name='Login' redirectUrl='/' /></Nav.Link>
-            <Nav.Link><ReroutingButton name='Player' redirectUrl='/player' /></Nav.Link>
-            <Nav.Link><ReroutingButton name='Playlists' redirectUrl='/playlists' /></Nav.Link>
-            <Nav.Link><ReroutingButton name='The Makers' redirectUrl='/about' /></Nav.Link>
-          </Nav>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="mr-auto" onSelect={url => this.props.history.push(url)}>
+            <ReroutingButton name='Login' url='/' />
+            <ReroutingButton name='Player' url='/player'/>
+            <ReroutingButton name='Playlists' url='/playlists' />
+            <ReroutingButton name='The Makers' url='/about' />
+            </Nav>
         </Navbar.Collapse>
       </Navbar>
 
-    )
-  }
-}
-
-export default Header;
+        )
+      }
+    }
+    
+export default withRouter(Header);

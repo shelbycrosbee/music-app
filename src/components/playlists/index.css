@@ -3,7 +3,8 @@
   margin-left: 25px;
   margin-right: 25px;
 }
-.active{
+
+.activeUser{
   background-color: rgb(132, 85, 177);
   color: white;
   font-size: 28px;

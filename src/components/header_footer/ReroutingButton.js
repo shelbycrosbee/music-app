@@ -1,15 +1,17 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
 
 
-function Button( props ){
-  const redirect = (route) => {
-    props.history.push(route)
-  }
+function ReroutingButton(props) {
 
-  return(
-    <p onClick={() => redirect(props.redirectUrl)}> { props.name } </p>
+
+  return (
+    <Nav.Item>
+      <Nav.Link eventKey={props.url}>{props.name}
+      </Nav.Link>
+    </Nav.Item>
   )
 }
 
-export default withRouter(Button);
+export default ReroutingButton;

@@ -23,7 +23,8 @@ class Player extends React.Component {
       position: 0,
       duration: 0,
       spotifyInit: false,
-      joinedMyPlaylist: false
+      joinedMyPlaylist: false,
+      playerDelay: false
     };
     this.checkForPlayer = this.checkForPlayer.bind(this);
     this.joinPlaylist = this.joinPlaylist.bind(this)
@@ -63,7 +64,16 @@ class Player extends React.Component {
     axios.put(`${process.env.REACT_APP_API_URL}users/activeStatus`, {
       spotify_id: this.props.user.spotify_id,
       active: true
-        })
+    })
+    // if (this.state.playerDelay) {
+    //   this.player.pause();
+    //   setTimeout(() => {
+    //     this.setState({ playerDelay: false })
+    //     this.player.seek(this.props.syncMS)
+    //     this.player.resume();
+    //   }
+    //     , 5000)
+    // }
   }
 
 
@@ -145,7 +155,7 @@ class Player extends React.Component {
       url: "https://api.spotify.com/v1/me/player",
       data: {
         device_ids: [deviceId],
-        play: true
+        play: false
       },
       headers: {
         Authorization: `${this.props.token}`
@@ -182,7 +192,7 @@ class Player extends React.Component {
       url: "https://api.spotify.com/v1/me/player/play",
       data: {
         device_ids: [deviceId],
-        play: true,
+        play: false,
         context_uri: `${playlist_data.playlist_uri}`,
         offset: {
           position: (playlist_data.position ? playlist_data.position : 0)
@@ -200,6 +210,20 @@ class Player extends React.Component {
       .catch(error => {
         console.log(error)
       })
+
+    // this.setState({
+    //   playerDelay: true
+    // })
+    // this.player.togglePlay()
+
+    this.player.pause();
+    setTimeout(() => {
+      alert('timeout REached!')
+      // this.setState({ playerDelay: false })
+      this.player.seek(this.props.syncMS)
+      this.player.resume();
+    }
+      , 5000)
   }
 
   getPosition() {
@@ -210,6 +234,7 @@ class Player extends React.Component {
       }
       console.log("TIWAODSNDSF")
       let playlistInfo = {
+        join_time: Date.now(),
         progress_ms: state.position,
         playlist_uri: state.context.uri,
         position: (state.track_window.previous_tracks.length ? state.track_window.previous_tracks.length : 0)
@@ -232,7 +257,7 @@ class Player extends React.Component {
       playing,
     } = this.state;
 
-    
+
     let playerOrPlaylists = (this.props.topic_id ?
       <>
         <div>
@@ -292,6 +317,7 @@ const mapStateToProps = (state, props) => {
     token_init: state.tokenReducer.token_init,
     playlist: state.playlistReducer,
     topic_id: state.topicReducer.topic_id,
+    syncMS: state.playlistSyncReducer.syncMS
   }
 }
 

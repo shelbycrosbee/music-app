@@ -54,7 +54,7 @@ class Playlists extends Component {
       <>
         <Accordion defaultActiveKey="0">
           <Card>
-            <Accordion.Toggle as={Card.Header} eventKey="0" className="active">
+            <Accordion.Toggle as={Card.Header} eventKey="0" className="activeUser">
               Active Users
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">

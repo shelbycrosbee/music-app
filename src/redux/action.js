@@ -1,4 +1,4 @@
-import { LOGIN, REGISTER, STORE_PLAYLIST, STORE_TOPIC } from './actionType';
+import { LOGIN, REGISTER, STORE_PLAYLIST, STORE_TOPIC, STORE_PLAYLIST_MS } from './actionType';
 import axios from 'axios';
 
 export function login(user, token, history) {
@@ -89,6 +89,17 @@ export function getPlaylist() {
       type: STORE_PLAYLIST,
       payload: {
         playlist_uri: playlist.data.uri_link,
+      }
+    })
+  }
+}
+
+export function storePlaylistMS(syncMS){
+  return async function (dispatch, getState) {
+    dispatch({
+      type: STORE_PLAYLIST_MS,
+      payload: {
+        syncMS
       }
     })
   }
