@@ -38,7 +38,7 @@ class Player extends React.Component {
     }
     this.checkForPlayer();
 
-    axios.put(`${process.env.REACT_APP_API_URL}users/toggleActive`, {
+    axios.put(`${process.env.REACT_APP_API_URL}users/activeStatus`, {
       spotify_id: this.props.user.spotify_id,
       active: true
     })
@@ -53,14 +53,14 @@ class Player extends React.Component {
   componentWillUnmount() {
     this.setState({ joinedMyPlaylist: false })
     this.player.disconnect();
-    axios.put(`${process.env.REACT_APP_API_URL}users/toggleActive`, {
+    axios.put(`${process.env.REACT_APP_API_URL}users/activeStatus`, {
       spotify_id: this.props.user.spotify_id,
       active: false
     })
   }
 
   componentDidUpdate() {
-    axios.put(`${process.env.REACT_APP_API_URL}users/toggleActive`, {
+    axios.put(`${process.env.REACT_APP_API_URL}users/activeStatus`, {
       spotify_id: this.props.user.spotify_id,
       active: true
         })
