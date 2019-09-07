@@ -10,6 +10,7 @@ import { Button } from 'react-bootstrap'
 // import ReroutingButton from '../header_footer/ReroutingButton';
 // import Websocket from '../websocket/Websocket';
 import * as Datetime from 'react-datetime';
+import PlaylistPage from '../playlists/PlaylistPage';
 // require('react-datetime')
 
 const hash = window.location.hash
@@ -38,17 +39,11 @@ class HomePage extends Component {
     }
   }
 
-  dateButton() {
-    let time = Date.now()
-    console.log(time)
-  }
 
   render() {
     return (
       <div>
-        <PlaylistRedirectButton topic_id='1234' display_name='Shelby' />
-        {/* <img src={`${this.props.user.profile_pic}`}/> */}
-        <Button onClick={() =>  this.dateButton() }>get date</Button>
+        <PlaylistPage />
       </div>
 
     )

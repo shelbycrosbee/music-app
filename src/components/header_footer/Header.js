@@ -25,7 +25,6 @@ class Header extends Component {
           <Nav className="mr-auto" onSelect={url => this.props.history.push(url)}>
             <ReroutingButton name='Login' url='/' />
             <ReroutingButton name='Player' url='/player'/>
-            <ReroutingButton name='Playlists' url='/playlists' />
             <ReroutingButton name='The Makers' url='/about' />
             </Nav>
         </Navbar.Collapse>
