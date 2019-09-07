@@ -26,6 +26,7 @@ class Player extends React.Component {
       joinedMyPlaylist: false
     };
     this.checkForPlayer = this.checkForPlayer.bind(this);
+    this.joinPlaylist = this.joinPlaylist.bind(this)
   }
 
 
@@ -38,7 +39,8 @@ class Player extends React.Component {
     this.checkForPlayer();
 
     axios.put(`${process.env.REACT_APP_API_URL}users/toggleActive`, {
-      spotify_id: this.props.user.spotify_id
+      spotify_id: this.props.user.spotify_id,
+      active: true
     })
 
     axios.put(`${process.env.REACT_APP_API_URL}users/setTopicID`, {
@@ -52,14 +54,16 @@ class Player extends React.Component {
     this.setState({ joinedMyPlaylist: false })
     this.player.disconnect();
     axios.put(`${process.env.REACT_APP_API_URL}users/toggleActive`, {
-      spotify_id: this.props.user.spotify_id
+      spotify_id: this.props.user.spotify_id,
+      active: false
     })
   }
 
   componentDidUpdate() {
-    // if (this.props.user.spotify_id === this.props.topic_id && this.state.spotifyInit) {
-    //   this.joinPlaylist(this.props.playlist);
-    // }
+    axios.put(`${process.env.REACT_APP_API_URL}users/toggleActive`, {
+      spotify_id: this.props.user.spotify_id,
+      active: true
+        })
   }
 
 
@@ -171,13 +175,15 @@ class Player extends React.Component {
 
   async joinPlaylist(playlist_data) {
     const { deviceId } = this.state;
+    // console.log(playlist_data)
+    console.log(this.props.playlist)
     await axios({
       method: 'put',
       url: "https://api.spotify.com/v1/me/player/play",
       data: {
         device_ids: [deviceId],
         play: true,
-        context_uri: `spotify:playlist:${playlist_data.playlist_uri}`,
+        context_uri: `${playlist_data.playlist_uri}`,
         offset: {
           position: (playlist_data.position ? playlist_data.position : 0)
         },
@@ -240,7 +246,7 @@ class Player extends React.Component {
               getPosition={() => this.getPosition()}
               player={this.player}
               spotifyInit={this.state.spotifyInit}
-              joinPlaylist={() => this.joinPlaylist()}
+              joinPlaylist={this.joinPlaylist}
             />
           </Col>
         </Row>

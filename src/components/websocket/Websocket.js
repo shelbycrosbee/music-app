@@ -53,8 +53,7 @@ class Websocket extends React.Component {
         this.state.playlist.emit('givePosition', { playlist: playlist_data, friend_id: data.friend_id });
       })
 
-      playlist.on('giveMeMoney', async (playlist_data) => {
-        debugger;
+      playlist.on('join', async (playlist_data) => {
         console.log(playlist_data);
         this.props.joinPlaylist(playlist_data);
       })
@@ -114,6 +113,7 @@ class Websocket extends React.Component {
   render() {
     return (
       <div>
+        <button onClick={()=>this.onJoin()}>onJoin</button>
         {/*<p> Connected: {(this.state.isConnected ? 'True' : 'False')}</p>
         <button onClick={() => this.connect()}> Connect? </button>
         <button onClick={() => this.disconnect()}> Disconnect! </button>
