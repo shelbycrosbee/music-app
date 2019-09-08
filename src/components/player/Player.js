@@ -7,6 +7,7 @@ import * as Actions from '../../redux/action';
 import { Row, Col } from 'react-bootstrap';
 import Websocket from '../websocket/Websocket'
 import Playlists from '../playlists/Playlists'
+import {joinSelf, joinOther} from './axiosCalls';
 
 
 class Player extends React.Component {
@@ -23,9 +24,11 @@ class Player extends React.Component {
       position: 0,
       duration: 0,
       spotifyInit: false,
-      joinedMyPlaylist: false
+      joinedMyPlaylist: false,
+      playerDelay: false
     };
     this.checkForPlayer = this.checkForPlayer.bind(this);
+    this.joinPlaylist = this.joinPlaylist.bind(this)
   }
 
 
@@ -37,8 +40,9 @@ class Player extends React.Component {
     }
     this.checkForPlayer();
 
-    axios.put(`${process.env.REACT_APP_API_URL}users/toggleActive`, {
-      spotify_id: this.props.user.spotify_id
+    axios.put(`${process.env.REACT_APP_API_URL}users/activeStatus`, {
+      spotify_id: this.props.user.spotify_id,
+      active: true
     })
 
     axios.put(`${process.env.REACT_APP_API_URL}users/setTopicID`, {
@@ -51,14 +55,25 @@ class Player extends React.Component {
   componentWillUnmount() {
     this.setState({ joinedMyPlaylist: false })
     this.player.disconnect();
-    axios.put(`${process.env.REACT_APP_API_URL}users/toggleActive`, {
-      spotify_id: this.props.user.spotify_id
+    axios.put(`${process.env.REACT_APP_API_URL}users/activeStatus`, {
+      spotify_id: this.props.user.spotify_id,
+      active: false
     })
   }
 
   componentDidUpdate() {
-    // if (this.props.user.spotify_id === this.props.topic_id && this.state.spotifyInit) {
-    //   this.joinPlaylist(this.props.playlist);
+    axios.put(`${process.env.REACT_APP_API_URL}users/activeStatus`, {
+      spotify_id: this.props.user.spotify_id,
+      active: true
+    })
+    // if (this.state.playerDelay) {
+    //   this.player.pause();
+    //   setTimeout(() => {
+    //     this.setState({ playerDelay: false })
+    //     this.player.seek(this.props.syncMS)
+    //     this.player.resume();
+    //   }
+    //     , 5000)
     // }
   }
 
@@ -141,7 +156,7 @@ class Player extends React.Component {
       url: "https://api.spotify.com/v1/me/player",
       data: {
         device_ids: [deviceId],
-        play: true
+        play: false
       },
       headers: {
         Authorization: `${this.props.token}`
@@ -171,30 +186,23 @@ class Player extends React.Component {
 
   async joinPlaylist(playlist_data) {
     const { deviceId } = this.state;
-    await axios({
-      method: 'put',
-      url: "https://api.spotify.com/v1/me/player/play",
-      data: {
-        device_ids: [deviceId],
-        play: true,
-        context_uri: `spotify:playlist:${playlist_data.playlist_uri}`,
-        offset: {
-          position: (playlist_data.position ? playlist_data.position : 0)
-        },
-
-        position_ms: (playlist_data.progress_ms ? playlist_data.progress_ms : 0)
-      },
-      headers: {
-        Authorization: `${this.props.token}`
-      }
-    })
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.log(error)
-      })
+    // console.log(playlist_data)
+    await joinOther(playlist_data, deviceId, this.props.token);
+    // this.player.pause();
+    // setTimeout(() => {
+  
+    //   // this.setState({ playerDelay: false })
+      // this.player.seek(this.props.syncMS)
+      // this.player.pause();
+  //   }
+  //     , 3000)
   }
+
+  async joinSelfButton(){
+    const { deviceId } = this.state;
+    await joinSelf(this.props.playlist, deviceId, this.props.token)
+  }
+  
 
   getPosition() {
     return this.player.getCurrentState().then(state => {
@@ -202,17 +210,15 @@ class Player extends React.Component {
         console.error('User is not playing music through the Web Playback SDK');
         return;
       }
-      console.log("TIWAODSNDSF")
       let playlistInfo = {
+        join_time: Date.now(),
         progress_ms: state.position,
-        playlist_uri: state.context.uri,
-        position: (state.track_window.previous_tracks.length ? state.track_window.previous_tracks.length : 0)
+        playlist_uri: state.track_window.current_track.uri,
+        // position: (state.track_window.previous_tracks.length ? state.track_window.previous_tracks.length : 0)
       }
       return playlistInfo;
-      ;
     })
   }
-
 
   render() {
     const {
@@ -227,7 +233,11 @@ class Player extends React.Component {
     } = this.state;
 
 
+<<<<<<< HEAD
     let playerOrPlaylists = (this.props.topic_id !== "" ?
+=======
+    let playerOrPlaylists = (this.props.topic_id ?
+>>>>>>> 9f66d06995a67c78d33f335096876b68d7afbb84
       <>
         <div>
           <h3>Code School Spotify Player</h3>
@@ -240,14 +250,13 @@ class Player extends React.Component {
               getPosition={() => this.getPosition()}
               player={this.player}
               spotifyInit={this.state.spotifyInit}
-              joinPlaylist={() => this.joinPlaylist()}
+              joinPlaylist={this.joinPlaylist}
             />
           </Col>
         </Row>
         <Row>
           {/*<button onClick={() => this.getPosition()}>don't click me</button>*/}
 
-          {/* <Col xs={12} sm={8}><img src={albumImage} alt="album art" /></Col> */}
           <Col>
             <img src={albumImage} />
             <p><u>Artist</u>: {artistName}</p>
@@ -257,8 +266,9 @@ class Player extends React.Component {
               playing={this.state.playing}
               player={this.player}
               checkForPlayer={() => this.checkForPlayer()}
-              joinSelfButton={() => this.joinPlaylist(this.props.playlist)}
               spotifyInit={this.state.spotifyInit}
+              joinSelfButton={() => this.joinSelfButton()}
+              joinPlaylist={() => this.joinPlaylist()}
               owner={this.props.topic_id === this.props.user.spotify_id}
             />
           </Col>
@@ -286,6 +296,7 @@ const mapStateToProps = (state, props) => {
     token_init: state.tokenReducer.token_init,
     playlist: state.playlistReducer,
     topic_id: state.topicReducer.topic_id,
+    syncMS: state.playlistSyncReducer.syncMS
   }
 }
 

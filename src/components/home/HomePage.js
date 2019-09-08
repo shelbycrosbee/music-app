@@ -6,8 +6,12 @@ import * as Actions from '../../redux/action';
 import axios from 'axios';
 import PlaylistRedirectButton from '../playlists/PlaylistRedirectButton'
 import Playlists from '../playlists/Playlists';
+import { Button } from 'react-bootstrap'
 // import ReroutingButton from '../header_footer/ReroutingButton';
 // import Websocket from '../websocket/Websocket';
+import * as Datetime from 'react-datetime';
+import PlaylistPage from '../playlists/PlaylistPage';
+// require('react-datetime')
 
 const hash = window.location.hash
   .substring(1)
@@ -35,12 +39,13 @@ class HomePage extends Component {
     }
   }
 
+
   render() {
     return (
       <div>
-        <PlaylistRedirectButton topic_id='1234' display_name='Shelby' />
-        {/* <img src={`${this.props.user.profile_pic}`}/> */}
+        <PlaylistPage />
       </div>
+
     )
   }
 }

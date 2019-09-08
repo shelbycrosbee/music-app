@@ -52,16 +52,8 @@ class Playlists extends Component {
 
     return (
       <>
-        <Accordion defaultActiveKey="0">
-          <Card>
-            <Accordion.Toggle as={Card.Header} eventKey="0" className="active">
-              Active Users
-            </Accordion.Toggle>
-            <Accordion.Collapse eventKey="0">
-              <Card.Body><ul>{content}</ul></Card.Body>
-            </Accordion.Collapse>
-          </Card>
-          <Card>
+       <Accordion defaultActiveKey="0">
+        <Card>
             <Accordion.Toggle as={Card.Header} eventKey="1" className="your">
               {this.props.user.display_name}'s Playlist
             </Accordion.Toggle>
@@ -69,6 +61,16 @@ class Playlists extends Component {
               <Card.Body><button onClick={() => this.getMyPlaylist()}>start saved playlist</button></Card.Body>
             </Accordion.Collapse>
           </Card>
+       
+          <Card>
+            <Accordion.Toggle as={Card.Header} eventKey="0" className="activeUser">
+              Active Users
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="0">
+              <Card.Body><ul>{content}</ul></Card.Body>
+            </Accordion.Collapse>
+          </Card>
+        
 
         </Accordion>
       </>
