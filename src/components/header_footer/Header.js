@@ -16,7 +16,7 @@ class Header extends Component {
 
 
   render() {
-    const login = (this.props.tokenReducer.token ?  this.props.userReducer.display_name : 'Login')
+    const loginLogout = (this.props.tokenReducer.token ?  'Logout' : 'Login')
 
     return (
 
@@ -25,13 +25,13 @@ class Header extends Component {
           <Logo />
           {/* <ReroutingButton name='Home Page' url='/home' /> */}
         </Navbar.Brand>
-        {/* <Navbar.Text>
+        <Navbar.Text className='displayName' >
           {this.props.user.display_name}
-        </Navbar.Text> */}
+        </Navbar.Text>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto" onSelect={url => this.props.history.push(url)}>
-            <ReroutingButton name={login} url='/' />
+            <ReroutingButton name={loginLogout} url='/' />
             <ReroutingButton name='Player' url='/player' />
             <ReroutingButton name='The Makers' url='/about' />
           </Nav>
