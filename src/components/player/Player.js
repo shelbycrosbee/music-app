@@ -156,7 +156,7 @@ class Player extends React.Component {
       url: "https://api.spotify.com/v1/me/player",
       data: {
         device_ids: [deviceId],
-        play: false
+        play: true
       },
       headers: {
         Authorization: `${this.props.token}`
@@ -236,7 +236,7 @@ class Player extends React.Component {
     let playerOrPlaylists = (this.props.topic_id ?
       <>
         <div>
-          <h3>Code School Spotify Player</h3>
+          <h3>{this.props.userReducer.display_name}`s Player</h3>
         </div>
 
         {error && <p>Error: {error}</p>}
