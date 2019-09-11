@@ -23,6 +23,7 @@ class PlayerPage extends Component {
           <Col sm={12}>
             <Player
               playlistFromWebsocket={this.props.playlistFromWebsocket}
+              onJoin={()=>this.props.onJoin()}
             />
           </Col>
         </Row>

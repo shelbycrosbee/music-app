@@ -95,6 +95,7 @@ class App extends React.Component {
           <Route path="/player" render={(props) =>
             <PlayerPage 
             playlistFromWebsocket={this.state.playlist}
+            onJoin={()=> this.onJoin()}
             />
           }
           />

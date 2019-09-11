@@ -242,12 +242,12 @@ class Player extends React.Component {
         {error && <p>Error: {error}</p>}
         <Row className='center bodyText' >
           <Col>
-            {/* <Websocket
+            <Websocket
               getPosition={() => this.getPosition()}
               player={this.player}
               spotifyInit={this.state.spotifyInit}
               joinPlaylist={this.joinPlaylist}
-            /> */}
+            />
           </Col>
         </Row>
         <Row>
@@ -267,6 +267,7 @@ class Player extends React.Component {
               joinSelfButton={() => this.joinSelfButton()}
               joinPlaylist={() => this.joinPlaylist()}
               owner={this.props.topic_id === this.props.user.spotify_id}
+              onJoin={()=>this.props.onJoin()}
             />
           </Col>
         </Row>
