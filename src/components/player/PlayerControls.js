@@ -7,6 +7,9 @@ import { faPlay, faPause, faForward, faBackward } from '@fortawesome/free-solid-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from 'react-bootstrap'
 import './index.css'
+import Ws from '@adonisjs/websocket-client'
+
+const ws = Ws('ws://localhost:3333')
 
 
 class PlayerControls extends Component {
@@ -41,6 +44,7 @@ class PlayerControls extends Component {
 
   onPlayClick() {
     this.props.player.togglePlay();
+    this.props.playlistFromWebsocket.emit('aqui', { topic_id: this.props.topic_id });
   }
 
   onNextClick() {

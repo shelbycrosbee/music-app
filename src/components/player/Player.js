@@ -7,7 +7,7 @@ import * as Actions from '../../redux/action';
 import { Row, Col } from 'react-bootstrap';
 import Websocket from '../websocket/Websocket'
 import Playlists from '../playlists/Playlists'
-import {joinSelf, joinOther} from './axiosCalls';
+import { joinSelf, joinOther } from './axiosCalls';
 
 
 class Player extends React.Component {
@@ -190,19 +190,19 @@ class Player extends React.Component {
     await joinOther(playlist_data, deviceId, this.props.token);
     // this.player.pause();
     // setTimeout(() => {
-  
+
     //   // this.setState({ playerDelay: false })
-      // this.player.seek(this.props.syncMS)
-      // this.player.pause();
-  //   }
-  //     , 3000)
+    // this.player.seek(this.props.syncMS)
+    // this.player.pause();
+    //   }
+    //     , 3000)
   }
 
-  async joinSelfButton(){
+  async joinSelfButton() {
     const { deviceId } = this.state;
     await joinSelf(this.props.playlist, deviceId, this.props.token)
   }
-  
+
 
   getPosition() {
     return this.player.getCurrentState().then(state => {
@@ -242,12 +242,12 @@ class Player extends React.Component {
         {error && <p>Error: {error}</p>}
         <Row className='center bodyText' >
           <Col>
-            <Websocket
+            {/* <Websocket
               getPosition={() => this.getPosition()}
               player={this.player}
               spotifyInit={this.state.spotifyInit}
               joinPlaylist={this.joinPlaylist}
-            />
+            /> */}
           </Col>
         </Row>
         <Row>
@@ -259,6 +259,7 @@ class Player extends React.Component {
             <p><u>Track</u>: {trackName}</p>
             <p><u>Album</u>: {albumName}</p>
             <PlayerControls
+              playlistFromWebsocket={this.props.playlistFromWebsocket}
               playing={this.state.playing}
               player={this.player}
               checkForPlayer={() => this.checkForPlayer()}

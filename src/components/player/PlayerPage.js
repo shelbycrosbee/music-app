@@ -18,16 +18,18 @@ class PlayerPage extends Component {
   render() {
     return (
       <>
-       
+
         <Row className='center bodyText' >
           <Col sm={12}>
-            <Player />
+            <Player
+              playlistFromWebsocket={this.props.playlistFromWebsocket}
+            />
           </Col>
-          </Row>
-          <Row>
+        </Row>
+        <Row>
           {/* <img src={`${this.props.user.profile_pic}`}/> */}
-          </Row>
-        
+        </Row>
+
       </>
     )
   }
