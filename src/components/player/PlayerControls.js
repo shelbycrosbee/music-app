@@ -52,7 +52,8 @@ class PlayerControls extends Component {
   }
 
   sync(){
-    this.props.playlistFromWebsocket.emit('aqui', { topic_id: this.props.topic_id });
+    const newPlaylist = ws.subscribe(`playlist:${this.props.topicReducer.topic_id}`)
+    newPlaylist.emit('aqui', { topic_id: this.props.topic_id });
   }
 
   render() {
@@ -90,6 +91,7 @@ const mapStateToProps = (state, props) => {
     user: state.userReducer,
     token: state.tokenReducer.token,
     playlist: state.playlistReducer,
+    topicReducer: state.topicReducer
   }
 }
 
