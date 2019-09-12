@@ -233,11 +233,7 @@ class Player extends React.Component {
     } = this.state;
 
 
-<<<<<<< HEAD
     let playerOrPlaylists = (this.props.topic_id !== "" ?
-=======
-    let playerOrPlaylists = (this.props.topic_id ?
->>>>>>> 9f66d06995a67c78d33f335096876b68d7afbb84
       <>
         <div>
           <h3>Code School Spotify Player</h3>
