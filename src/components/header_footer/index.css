@@ -7,6 +7,10 @@
   height: 60px;
 }
 
+.displayName {
+  font-size: 22px;
+  color: rgb(224, 192, 243)!important
+}
 
 .clear { clear: both; height: 20px; }
 

@@ -16,6 +16,8 @@ class Header extends Component {
 
 
   render() {
+    const loginLogout = (this.props.tokenReducer.token ?  'Logout' : 'Login')
+
     return (
 
       <Navbar collapseOnSelect className="customBg" expand='sm'>
@@ -23,13 +25,13 @@ class Header extends Component {
           <Logo />
           {/* <ReroutingButton name='Home Page' url='/home' /> */}
         </Navbar.Brand>
-        <Navbar.Text>
+        <Navbar.Text className='displayName' >
           {this.props.user.display_name}
         </Navbar.Text>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto" onSelect={url => this.props.history.push(url)}>
-            <ReroutingButton name='Login' url='/' />
+            <ReroutingButton name={loginLogout} url='/' />
             <ReroutingButton name='Player' url='/player' />
             <ReroutingButton name='The Makers' url='/about' />
           </Nav>
@@ -44,6 +46,7 @@ const mapStateToProps = (state, props) => {
   return {
     ...state,
     user: state.userReducer,
+    tokenReducer: state.tokenReducer
   }
 }
 
