@@ -43,7 +43,6 @@ class App extends React.Component {
         //api call to websocket
         this.state.playlist.emit('givePosition', { playlist: playlist_data, friend_id: data.friend_id });
       })
-
       playlist.on('join', async (playlist_data) => {
         console.log(playlist_data);
         playlist_data.progress_ms = parseInt(playlist_data.progress_ms) - parseInt(playlist_data.join_time) + Date.now();
