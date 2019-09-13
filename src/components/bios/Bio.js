@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './index.css'
 import { Row, Col, Card, Button, Container } from 'react-bootstrap';
 import shelby from '../images/shelby.jpg'
+import taylor from '../images/taylor.jpg'
 
 export default class Bio extends Component {
   render() {
@@ -24,7 +25,15 @@ export default class Bio extends Component {
         </Col>
 
 
-        <Col className='text'>Taylor Warren</Col>
+        <Col><Card style={{ width: '18rem' }} className="cardForBio">
+          <Card.Img variant="top" src={taylor} />
+          <Card.Body>
+            <Card.Title>Taylor Warren</Card.Title>
+            <Card.Text> 
+            </Card.Text>
+            <Button className="button" href="" target="blank">Visit My Website</Button>
+          </Card.Body>
+        </Card></Col>
         <Col className='text'>Tom Bawel</Col>
       </Row>
      
