@@ -96,6 +96,7 @@ class App extends React.Component {
             <PlayerPage 
             playlistFromWebsocket={this.state.playlist}
             onJoin={()=> this.onJoin()}
+            addEventListeners={() => this.addEventListeners()}
             />
           }
           />

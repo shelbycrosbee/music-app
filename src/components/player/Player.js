@@ -260,6 +260,7 @@ class Player extends React.Component {
             <p><u>Album</u>: {albumName}</p>
             <PlayerControls
               playlistFromWebsocket={this.props.playlistFromWebsocket}
+              addEventListeners={() => this.props.addEventListeners()}
               playing={this.state.playing}
               player={this.player}
               checkForPlayer={() => this.checkForPlayer()}

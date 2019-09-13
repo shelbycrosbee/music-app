@@ -19,6 +19,7 @@ class PlayerControls extends Component {
   }
 
 
+
   onPrevClick() {
     if (!this.props.player) {
       this.props.checkForPlayer()
@@ -51,9 +52,9 @@ class PlayerControls extends Component {
     this.props.player.nextTrack();
   }
 
+
   sync(){
-    const newPlaylist = ws.subscribe(`playlist:${this.props.topicReducer.topic_id}`)
-    newPlaylist.emit('aqui', { topic_id: this.props.topic_id });
+    this.props.playlistFromWebsocket.emit('aqui', { topic_id: this.props.topicReducer.topic_id });
   }
 
   render() {
