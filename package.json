@@ -46,7 +46,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3333",
+  // "proxy": "http://localhost:3333",
   "devDependencies": {
     "@babel/plugin-transform-regenerator": "^7.4.5",
     "@fortawesome/fontawesome-free": "^5.10.2"
