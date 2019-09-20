@@ -66,6 +66,9 @@ export async function startListening(deviceId, spotify_id) {
       .catch(error => {
         console.log(error)
       })
+      dispatch({
+        type: STORE_PLAYLIST
+      })
   }
 }
 
