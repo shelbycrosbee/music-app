@@ -189,6 +189,9 @@ class Player extends React.Component {
     const { deviceId } = this.state;
     // console.log(playlist_data)
     await joinOther(playlist_data, deviceId, this.props.token);
+    let seekProgressMS = parseInt(playlist_data.progress_ms) - parseInt(playlist_data.join_time) + Date.now();
+    this.player.seek(seekProgressMS).then(() => console.log(seekProgressMS))
+
     // this.player.pause();
     // setTimeout(() => {
   
@@ -206,13 +209,14 @@ class Player extends React.Component {
   
 
   getPosition() {
+    let checkJoinTime = Date.now();
     return this.player.getCurrentState().then(state => {
       if (!state) {
         console.error('User is not playing music through the Web Playback SDK');
         return;
       }
       let playlistInfo = {
-        join_time: Date.now(),
+        join_time: checkJoinTime,
         progress_ms: state.position,
         playlist_uri: state.track_window.current_track.uri,
         // position: (state.track_window.previous_tracks.length ? state.track_window.previous_tracks.length : 0)
@@ -241,16 +245,6 @@ class Player extends React.Component {
         </div>
 
         {error && <p>Error: {error}</p>}
-        <Row className='center bodyText' >
-          <Col>
-            <Websocket
-              getPosition={() => this.getPosition()}
-              player={this.player}
-              spotifyInit={this.state.spotifyInit}
-              joinPlaylist={this.joinPlaylist}
-            />
-          </Col>
-        </Row>
         <Row>
           {/*<button onClick={() => this.getPosition()}>don't click me</button>*/}
 
@@ -259,13 +253,24 @@ class Player extends React.Component {
             <p><u>Artist</u>: {artistName}</p>
             <p><u>Track</u>: {trackName}</p>
             <p><u>Album</u>: {albumName}</p>
-            <PlayerControls
+            {/* <PlayerControls
               playing={this.state.playing}
               player={this.player}
               checkForPlayer={() => this.checkForPlayer()}
               spotifyInit={this.state.spotifyInit}
               joinSelfButton={() => this.joinSelfButton()}
               joinPlaylist={() => this.joinPlaylist()}
+              owner={this.props.topic_id === this.props.user.spotify_id}
+            /> */}
+            <Websocket
+              getPosition={() => this.getPosition()}
+              player={this.player}
+              spotifyInit={this.state.spotifyInit}
+              joinPlaylist={this.joinPlaylist}
+              playing={this.state.playing}
+              checkForPlayer={() => this.checkForPlayer()}
+              spotifyInit={this.state.spotifyInit}
+              joinSelfButton={() => this.joinSelfButton()}
               owner={this.props.topic_id === this.props.user.spotify_id}
             />
           </Col>

@@ -3,6 +3,7 @@ import Ws from '@adonisjs/websocket-client'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../../redux/action';
+import PlayerControls from '../player/PlayerControls';
 
 const ws = Ws('ws://localhost:3333')
 
@@ -48,13 +49,14 @@ class Websocket extends React.Component {
       playlist.on('donde', async (data) => {
         const playlist_data = await this.props.getPosition();
         //api call to websocket
-        this.state.playlist.emit('givePosition', { playlist: playlist_data, friend_id: data.friend_id });
+        this.state.playlist.emit('givePosition', { playlist: {...playlist_data}, friend_id: data.friend_id });
       })
 
       playlist.on('join', async (playlist_data) => {
-        console.log(playlist_data);
-        playlist_data.progress_ms = parseInt(playlist_data.progress_ms) - parseInt(playlist_data.join_time) + Date.now();
-        this.props.storePlaylistMS(playlist_data.progress_ms);
+        // console.log(playlist_data);
+        // playlist_data.progress_ms = parseInt(playlist_data.progress_ms) - parseInt(playlist_data.join_time) + Date.now();
+        // console.log('Look at theeeese numbers: ' + (Date.now() - parseInt(playlist_data.join_time)));
+        // this.props.storePlaylistMS(playlist_data.progress_ms);
         this.props.joinPlaylist(playlist_data);
       })
     }
@@ -108,7 +110,16 @@ class Websocket extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={()=>this.onJoin()}>onJoin</button>
+        {/* <button onClick={()=>this.onJoin()}>onJoin</button> */}
+        <PlayerControls
+          playing={this.props.playing}
+          player={this.props.player}
+          checkForPlayer={() => this.props.checkForPlayer()}
+          spotifyInit={this.props.spotifyInit}
+          joinSelfButton={() => this.props.joinSelfButton()}
+          joinPlaylist={() => this.onJoin()}
+          owner={this.props.owner}
+        />
       </div>
     )
   }
