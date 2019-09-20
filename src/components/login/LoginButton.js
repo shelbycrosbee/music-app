@@ -4,7 +4,7 @@ import { Row, Col, Button } from 'react-bootstrap';
 
 const CLIENT_ID = '1af7ab55e7e64df992dadf08719596ac';
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
-const redirectUri = "http://localhost:3000/home";
+const redirectUri = process.env.REACT_APP_REDIRECT_URL;
 const scopes = [
   "user-read-currently-playing",
   "user-read-playback-state",
