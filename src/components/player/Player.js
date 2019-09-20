@@ -151,12 +151,13 @@ class Player extends React.Component {
 
   transferPlaybackHere() {
     const { deviceId } = this.state;
+    console.log('transferPlaybackHere:' + deviceId)
     axios({
       method: 'put',
       url: "https://api.spotify.com/v1/me/player",
       data: {
         device_ids: [deviceId],
-        play: false
+        play: true
       },
       headers: {
         Authorization: `${this.props.token}`
