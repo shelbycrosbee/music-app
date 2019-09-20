@@ -7,7 +7,7 @@ import * as Actions from '../../redux/action';
 import { Row, Col } from 'react-bootstrap';
 import Websocket from '../websocket/Websocket'
 import Playlists from '../playlists/Playlists'
-import {joinSelf, joinOther} from './axiosCalls';
+import { joinSelf, joinOther } from './axiosCalls';
 
 
 class Player extends React.Component {
@@ -194,19 +194,20 @@ class Player extends React.Component {
 
     // this.player.pause();
     // setTimeout(() => {
-  
+
     //   // this.setState({ playerDelay: false })
-      // this.player.seek(this.props.syncMS)
-      // this.player.pause();
-  //   }
-  //     , 3000)
+    // this.player.seek(this.props.syncMS)
+    // this.player.pause();
+    //   }
+    //     , 3000)
   }
 
-  async joinSelfButton(){
+  async joinSelfButton() {
     const { deviceId } = this.state;
-    await joinSelf(this.props.playlist, deviceId, this.props.token)
+    this.props.startListening(deviceId, this.props.user.spotify_id)
+    // await joinSelf(this.props.playlist, deviceId, this.props.token)
   }
-  
+
 
   getPosition() {
     let checkJoinTime = Date.now();
