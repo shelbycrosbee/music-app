@@ -1,4 +1,4 @@
-import { LOGIN, REGISTER, STORE_PLAYLIST, STORE_TOPIC, STORE_PLAYLIST_MS } from './actionType';
+import { LOGIN, REGISTER, STORE_PLAYLIST, STORE_TOPIC, STORE_PLAYLIST_MS, AXIOS_CALL } from './actionType';
 import axios from 'axios';
 
 export function login(user, token, history) {
@@ -38,37 +38,41 @@ export function register() {
   }
 }
 
-export async function startListening(deviceId, spotify_id) {
-  return async function (dispatch, getState) {
+export function startListening(deviceId, spotify_id) {
+  return function action(dispatch, getState) {
     const currentState = getState();
-    const data = await axios.get('/playlist', {
+    dispatch({ type: AXIOS_CALL });
+
+    const request = axios.get('/playlist', {
       params: { spotify_id }
     })
-    await axios({
-      method: 'put',
-      url: "https://api.spotify.com/v1/me/player/play",
-      data: {
-        device_ids: [deviceId],
-        play: true,
-        context_uri: data.data.playlist.uri_link,
-        offset: {
-          position: data.data.playlist.position
-        },
-        position_ms: data.data.playlist.progress_ms
+    request.then(
+      data => {
+        axios({
+          method: 'put',
+          url: "https://api.spotify.com/v1/me/player/play",
+          data: {
+            device_ids: [deviceId],
+            play: true,
+            context_uri: data.data.uri_link,
+            offset: {
+              position: 0
+            },
+            position_ms: 0
+          },
+          headers: {
+            Authorization: currentState.tokenReducer.token
+          }
+        })
+          .then(response => {
+            console.log(response)
+          })
+          .catch(error => {
+            console.log(error)
+          })
       },
-      headers: {
-        Authorization: currentState.tokenReducer.token
-      }
-    })
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-      dispatch({
-        type: STORE_PLAYLIST
-      })
+      err => { }
+    );
   }
 }
 
@@ -102,7 +106,7 @@ export function getPlaylist() {
   }
 }
 
-export function storePlaylistMS(syncMS){
+export function storePlaylistMS(syncMS) {
   return async function (dispatch, getState) {
     dispatch({
       type: STORE_PLAYLIST_MS,
