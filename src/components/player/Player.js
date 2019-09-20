@@ -204,8 +204,8 @@ class Player extends React.Component {
 
   async joinSelfButton() {
     const { deviceId } = this.state;
-    this.props.startListening(deviceId, this.props.user.spotify_id)
-    // await joinSelf(this.props.playlist, deviceId, this.props.token)
+    // this.props.startListening(deviceId, this.props.user.spotify_id)
+    await joinSelf(this.props.playlist, deviceId, this.props.token)
   }
 
 
