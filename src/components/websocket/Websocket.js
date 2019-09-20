@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as Actions from '../../redux/action';
 import PlayerControls from '../player/PlayerControls';
 
-const ws = Ws(process.env.REACT_APP_API_URL)
+const ws = Ws(process.env.REACT_APP_API_WS)
 
 class Websocket extends React.Component {
   constructor(props) {
