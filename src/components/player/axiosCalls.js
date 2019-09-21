@@ -33,7 +33,7 @@ export const joinOther = (playlist_data, deviceId, token) => {
     url: "https://api.spotify.com/v1/me/player/play",
     data: {
       device_ids: [deviceId],
-      play: true,
+      play: false,
       uris: [`${playlist_data.playlist_uri}`],
       offset: {
         position: (playlist_data.position ? playlist_data.position : 0)
