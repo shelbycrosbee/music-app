@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as Actions from '../../redux/action';
 import { connect } from 'react-redux';
 import CustomPlaylist from './CustomPlaylist';
-import { ListGroup, Container } from 'react-bootstrap';
+import { ListGroup, Container, Col, Row } from 'react-bootstrap';
 
 class PlaylistPickerPage extends Component {
   constructor(props) {
@@ -37,10 +37,17 @@ class PlaylistPickerPage extends Component {
     }) : renderUserPlaylists = <p> No Playlist Loaded </p>)
     return (
       <Container>
-        <CustomPlaylist spotify_id={this.props.user.spotify_id} />
-        <ListGroup>
-          {renderUserPlaylists}
-        </ListGroup>
+
+        <Row className="justify-content-center">
+          <Col style={{ marginTop: '2em' }} md={{ span: 5, offset: 0 }}>
+            <ListGroup>
+              {renderUserPlaylists}
+            </ListGroup>
+          </Col>
+          <Col style={{ marginTop: '2em' }} md={{ span: 5, offset: 2 }}>
+            <CustomPlaylist spotify_id={this.props.user.spotify_id} />
+          </Col>
+        </Row>
       </Container>
     )
   }
