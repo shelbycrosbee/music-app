@@ -8,6 +8,7 @@ import Footer from './components/header_footer/Footer';
 import PlaylistPage from './components/playlists/PlaylistPage';
 import Bio from './components/bios/Bio'
 import './index.css'
+import PlaylistPickerPage from './components/playlistPicker/PlaylistPickerPage';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/player" component={PlayerPage} />
         <Route path="/playlists" component={PlaylistPage} />
         <Route path='/about' component={Bio} />
+        <Route path='/pick' component={PlaylistPickerPage} />
       </Switch>
       <Footer />
     </div>

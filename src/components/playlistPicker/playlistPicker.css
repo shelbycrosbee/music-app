@@ -1,0 +1,15 @@
+.playlistItem{
+  background-color: #6A4D85;
+  color: white;
+}
+
+.playlistItem:hover{
+  background-color:rgb(20, 12, 104);
+  color: rgb(9, 1, 94);
+  background-color: #E0C0F3;
+}
+
+.playlistItem:focus{
+  color: rgb(162, 2, 171);
+  background-color: rgb(211, 174, 232);
+}
