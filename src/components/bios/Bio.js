@@ -74,7 +74,7 @@ export default class Bio extends Component {
 
 
         <Row>
-          <Col className='textForBioPage justify-content-center'><h3>Fearful Leaders</h3></Col>
+          <Col className='textForBioPage justify-content-center'><h3><u>Fearful Leaders</u></h3></Col>
         </Row>
 
         <Row className='textForBioPage justify-content-center'>
