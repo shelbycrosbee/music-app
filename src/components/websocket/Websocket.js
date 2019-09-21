@@ -52,7 +52,7 @@ class Websocket extends React.Component {
       playlist.on('donde', async (data) => {
         const playlist_data = await this.props.getPosition();
         //api call to websocket
-        this.state.playlist.emit('givePosition', { playlist: { ...playlist_data }, friend_id: data.friend_id });
+        this.state.playlist.emit('givePosition', { playlist: { ...playlist_data, join_time: Date.now() }, friend_id: data.friend_id });
       })
 
       playlist.on('join', async (playlist_data) => {
