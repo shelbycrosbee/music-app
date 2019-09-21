@@ -67,7 +67,7 @@ class Playlists extends Component {
               Active Users
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
-              <Card.Body><ul>{content}</ul></Card.Body>
+              <Card.Body><ul style={{paddingInlineStart: '0'}}>{content}</ul></Card.Body>
             </Accordion.Collapse>
           </Card>
         
