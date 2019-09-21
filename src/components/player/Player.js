@@ -195,10 +195,11 @@ class Player extends React.Component {
   async joinPlaylist(playlist_data) {
     const { deviceId } = this.state;
     // console.log(playlist_data)
+    let seekProgressMS = parseInt(playlist_data.progress_ms) - parseInt(playlist_data.join_time) + Date.now();
+    setTimeout(() => this.player.seek(seekProgressMS).then(() => console.log(seekProgressMS + 5* 1000)), 5000)
     await joinOther(playlist_data, deviceId, this.props.token);
-    let seekProgressMS = await parseInt(playlist_data.progress_ms) - parseInt(playlist_data.join_time) + Date.now();
     await console.log('Timestamp#1:' + Date.now())
-    await this.player.seek(seekProgressMS).then(() => console.log(seekProgressMS))
+    
     await console.log('Timestamp#2:' + Date.now())
 
     // this.player.pause();
