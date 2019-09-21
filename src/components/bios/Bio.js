@@ -56,7 +56,7 @@ export default class Bio extends Component {
               <Card.Title>Taylor Warren</Card.Title>
               <Card.Text>
               </Card.Text>
-              <Button className="button" href="https://github.com/TaylorAWarren" target="blank">My GitHub</Button>
+              <Button className="button" href="https://youtu.be/dQw4w9WgXcQ?t=85" target="blank">My GitHub</Button>
             </Card.Body>
           </Card></Col>
 

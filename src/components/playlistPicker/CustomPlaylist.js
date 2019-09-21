@@ -1,7 +1,27 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {withRouter} from 'react-router-dom'
+import { bindActionCreators } from 'redux';
+import * as Actions from '../../redux/action';
+import { connect } from 'react-redux';
 
-export default class CustomPlaylist extends Component {
+const mapStateToProps = (state, props) => {
+  return {
+    ...state,
+    user: state.userReducer,
+    token: state.tokenReducer.token,
+    // token_init: state.tokenReducer.token_init,
+    // playlist: state.playlistReducer
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return (
+    bindActionCreators(Actions, dispatch)
+  )
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(class CustomPlaylist extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -9,9 +29,13 @@ export default class CustomPlaylist extends Component {
     }
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    axios.put(`${process.env.REACT_APP_API_URL}users/updatePlaylist`, { spotify_id: this.props.spotify_id, playlist_uri: this.state.id });
+    let modified_uri = this.state.id.replace('spotify:playlist:', '');
+    await axios.put(`${process.env.REACT_APP_API_URL}users/updatePlaylist`, { spotify_id: this.props.spotify_id, playlist_uri: modified_uri });
+    await this.props.getPlaylist();
+    this.props.storeTopic(this.props.user.spotify_id)
+    this.props.history.push('player');
   }
 
   handleEditChange = (e) => {
@@ -32,4 +56,4 @@ export default class CustomPlaylist extends Component {
       </div>
     )
   }
-}
+}))
