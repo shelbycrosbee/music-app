@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as Actions from '../../redux/action';
 import { connect } from 'react-redux';
 import CustomPlaylist from './CustomPlaylist';
+import { ListGroup, Container } from 'react-bootstrap';
 
 class PlaylistPickerPage extends Component {
   constructor(props) {
@@ -13,23 +14,8 @@ class PlaylistPickerPage extends Component {
       userPlaylists: null
     }
   }
+
   componentDidMount() {
-    // axios({
-    //   method: 'get',
-    //   url: `https://api.spotify.com/v1/users/${this.props.user.spotify_id}/playlists`,
-    //   data: {
-    //     user_id: this.props.user.spotify_id
-    //   },
-    //   headers: {
-    //     Authorization: `${this.props.token}`
-    //   }
-    // })
-    // .then(userPlaylists => {
-    //   let mappedPlaylists = userPlaylists.data.items.map(item => { return { id: item.id, name: item.name } })
-    //   console.log(userPlaylists.data.items)
-    //   console.log(mappedPlaylists)
-    //   this.setState({ userPlaylists: userPlaylists.data.items })
-    // })
     axios.get(`https://api.spotify.com/v1/users/${this.props.user.spotify_id}/playlists`, { headers: { Authorization: `${this.props.token}` } })
       .then(userPlaylists => {
         let mappedPlaylists = userPlaylists.data.items.map(item => { return { id: item.id, name: item.name } })
@@ -50,10 +36,12 @@ class PlaylistPickerPage extends Component {
       />
     }) : renderUserPlaylists = <p> No Playlist Loaded </p>)
     return (
-      <div>
+      <Container>
         <CustomPlaylist spotify_id={this.props.user.spotify_id} />
-        {renderUserPlaylists}
-      </div>
+        <ListGroup>
+          {renderUserPlaylists}
+        </ListGroup>
+      </Container>
     )
   }
 }

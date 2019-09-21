@@ -1,23 +1,47 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
+import { ListGroupItem } from 'react-bootstrap';
+import './playlistPicker.css'
+import { bindActionCreators } from 'redux';
+import * as Actions from '../../redux/action';
+import { connect } from 'react-redux';
 
-export default withRouter(class UserPlaylist extends Component {
+const mapStateToProps = (state, props) => {
+  return {
+    ...state,
+    user: state.userReducer,
+    token: state.tokenReducer.token,
+    // token_init: state.tokenReducer.token_init,
+    // playlist: state.playlistReducer
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return (
+    bindActionCreators(Actions, dispatch)
+  )
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(class UserPlaylist extends Component {
   constructor(props) {
     super(props);
   }
 
-  playlistSet = (e) => {
+  playlistSet = async (e) => {
     e.preventDefault();
-    axios.put(`${process.env.REACT_APP_API_URL}users/updatePlaylist`, { spotify_id: this.props.spotify_id, playlist_uri: this.props.id });
+    await axios.put(`${process.env.REACT_APP_API_URL}users/updatePlaylist`, { spotify_id: this.props.spotify_id, playlist_uri: this.props.id });
+    await this.props.getPlaylist();
+    this.props.storeTopic(this.props.user.spotify_id)
+    this.props.history.push('/Player')
   }
 
   render() {
     return (
-      <div>
-        <h1> {this.props.name}</h1>
-        <button onClick={(e) => this.playlistSet(e)}> This is the One! </button>
-      </div>
+      <ListGroupItem className='playlistItem' action onClick={(e) => this.playlistSet(e)}>
+        {this.props.name}
+        {/* <button onClick={(e) => this.playlistSet(e)}> This is the One! </button> */}
+      </ListGroupItem>
     )
   }
-})
+}))
