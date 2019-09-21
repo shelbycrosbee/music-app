@@ -43,7 +43,7 @@ export function startListening(deviceId, spotify_id) {
     const currentState = getState();
     dispatch({ type: AXIOS_CALL });
 
-    const request = axios.get(`${process.env.REACT_APP_API_URL}/playlist`, {
+    const request = axios.get(`${process.env.REACT_APP_API_URL}playlist`, {
       params: { spotify_id }
     })
     request.then(
