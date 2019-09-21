@@ -1,8 +1,7 @@
-.text {
+.textForBioPage {
   color: white;
   font-size: 15px;
   text-align: center;
-  margin-top: 50px;
 }
 
 
@@ -15,5 +14,4 @@
 
 .cardForBio {
   background-color: rgb(11, 1, 17);
- 
 }
