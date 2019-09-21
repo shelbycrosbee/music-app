@@ -196,7 +196,7 @@ class Player extends React.Component {
     const { deviceId } = this.state;
     // console.log(playlist_data)
     await joinOther(playlist_data, deviceId, this.props.token);
-    let seekProgressMS = await parseInt(playlist_data.progress_ms) - parseInt(playlist_data.join_time) + Date.now() + 500;
+    let seekProgressMS = await parseInt(playlist_data.progress_ms) - parseInt(playlist_data.join_time) + Date.now();
     await console.log('Timestamp#1:' + Date.now())
     await this.player.seek(seekProgressMS).then(() => console.log(seekProgressMS))
     await console.log('Timestamp#2:' + Date.now())
@@ -219,14 +219,14 @@ class Player extends React.Component {
 
 
   getPosition() {
-    let checkJoinTime = Date.now();
+    // let checkJoinTime = Date.now();
     return this.player.getCurrentState().then(state => {
       if (!state) {
         console.error('User is not playing music through the Web Playback SDK');
         return;
       }
       let playlistInfo = {
-        join_time: checkJoinTime,
+        // join_time: checkJoinTime,
         progress_ms: state.position,
         playlist_uri: state.track_window.current_track.uri,
         // position: (state.track_window.previous_tracks.length ? state.track_window.previous_tracks.length : 0)
