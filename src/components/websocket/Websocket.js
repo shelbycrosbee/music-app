@@ -31,9 +31,9 @@ class Websocket extends React.Component {
   componentDidMount() {
     //
     this.addEventListeners(this.connect())
-    if (this.props.spotify_id !== this.props.topic_id) {
-      setTimeout(() => { this.onJoin(); }, 1000);
-    }
+    // if (this.props.spotify_id !== this.props.topic_id) {
+    //   setTimeout(() => { this.onJoin(); }, 1000);
+    // }
   }
 
   componentDidUpdate() {
@@ -72,7 +72,7 @@ class Websocket extends React.Component {
     // }
     // else {
     //   if (this.props.spotifyInit) {
-    this.state.playlist.emit('aqui', { topic_id: this.props.topic_id });
+    setTimeout(() => this.state.playlist.emit('aqui', { topic_id: this.props.topic_id }), 1000);
     //   }
     // }
   }
