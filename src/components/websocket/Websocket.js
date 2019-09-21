@@ -31,6 +31,9 @@ class Websocket extends React.Component {
   componentDidMount() {
     //
     this.addEventListeners(this.connect())
+    if (this.props.spotify_id !== this.props.topic_id) {
+      setTimeout(() => { this.onJoin(); }, 1000);
+    }
   }
 
   componentDidUpdate() {
@@ -49,7 +52,7 @@ class Websocket extends React.Component {
       playlist.on('donde', async (data) => {
         const playlist_data = await this.props.getPosition();
         //api call to websocket
-        this.state.playlist.emit('givePosition', { playlist: {...playlist_data}, friend_id: data.friend_id });
+        this.state.playlist.emit('givePosition', { playlist: { ...playlist_data }, friend_id: data.friend_id });
       })
 
       playlist.on('join', async (playlist_data) => {

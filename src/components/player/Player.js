@@ -29,6 +29,7 @@ class Player extends React.Component {
     };
     this.checkForPlayer = this.checkForPlayer.bind(this);
     this.joinPlaylist = this.joinPlaylist.bind(this)
+    this.joinSelfButton = this.joinSelfButton.bind(this);
   }
 
 
@@ -144,6 +145,12 @@ class Player extends React.Component {
       await this.setState({ deviceId: device_id });
       await this.transferPlaybackHere();
     });
+
+    this.player.on('ready', async data => {
+      if (this.props.user.spotify_id === this.props.topic_id) {
+        setTimeout(() => { this.joinSelfButton(); }, 1000);
+      }
+    })
   }
 
 
@@ -156,7 +163,7 @@ class Player extends React.Component {
       url: "https://api.spotify.com/v1/me/player",
       data: {
         device_ids: [deviceId],
-        play: true
+        play: false
       },
       headers: {
         Authorization: `${this.props.token}`
@@ -168,6 +175,7 @@ class Player extends React.Component {
       .catch(error => {
         console.log(error)
       })
+
   }
 
 
@@ -203,7 +211,7 @@ class Player extends React.Component {
 
   async joinSelfButton() {
     const { deviceId } = this.state;
-     this.props.startListening(deviceId, this.props.user.spotify_id)
+    this.props.startListening(deviceId, this.props.user.spotify_id)
     // await joinSelf(this.props.playlist, deviceId, this.props.token)
   }
 
