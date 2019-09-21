@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './index.css'
 import { Image } from 'react-bootstrap'
-import logo from '../images/logo.svg'
+import logoandname from '../images/logo2.svg'
 import { withRouter } from 'react-router-dom'
 
 
@@ -17,7 +17,7 @@ class Logo extends Component {
   render() {
     return (
       <>
-        <Image src={logo} alt='logo' className="logo" onClick={(e) => this.logoGoHome()} />
+        <Image src={logoandname} alt='logo' className="logo" onClick={(e) => this.logoGoHome()} />
       </>
     )
   }
