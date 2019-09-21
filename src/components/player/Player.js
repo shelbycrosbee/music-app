@@ -95,7 +95,6 @@ class Player extends React.Component {
   onStateChanged(state) {
     // if we're no longer listening to music, we'll get a null state.
     if (state !== null) {
-      console.log(state.track_window);
       const {
         current_track: currentTrack,
         position,
