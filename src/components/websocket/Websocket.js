@@ -50,7 +50,10 @@ class Websocket extends React.Component {
         playerReady: true
       })
       playlist.on('donde', async (data) => {
+        let time_00 = Date.now();
         const playlist_data = await this.props.getPosition();
+        let time_02 = Date.now();
+        console.log(`Time_00: ${time_00} -- Time_01: ${playlist_data.time_01} -- Time_03: ${time_02}`);
         //api call to websocket
         this.state.playlist.emit('givePosition', { playlist: { ...playlist_data, join_time: Date.now() }, friend_id: data.friend_id });
       })

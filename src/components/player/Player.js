@@ -220,12 +220,14 @@ class Player extends React.Component {
 
   getPosition() {
     // let checkJoinTime = Date.now();
+    let time_01 = Date.now();
     return this.player.getCurrentState().then(state => {
       if (!state) {
         console.error('User is not playing music through the Web Playback SDK');
         return;
       }
       let playlistInfo = {
+        time_01: time_01,
         // join_time: checkJoinTime,
         progress_ms: state.position,
         playlist_uri: state.track_window.current_track.uri,
