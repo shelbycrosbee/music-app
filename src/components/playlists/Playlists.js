@@ -58,7 +58,7 @@ class Playlists extends Component {
               {this.props.user.display_name}'s Playlist
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="1">
-              <Card.Body><button onClick={() => this.getMyPlaylist()}>start saved playlist</button></Card.Body>
+              <Card.Body><button onClick={() => this.getMyPlaylist()}>Start Your Music!</button></Card.Body>
             </Accordion.Collapse>
           </Card>
        
