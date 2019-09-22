@@ -48,7 +48,9 @@ class Playlists extends Component {
     let content = <p>loading</p>
     if (this.state.loaded) {
       let usersList = this.state.users.map(user => {
+        if(user.spotify_id !== this.props.user.spotify_id){
         return <li><PlaylistRedirectButton topic_id={user.topic_id} display_name={user.display_name} /></li>
+        }
       })
       content = usersList
     }
