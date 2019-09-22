@@ -53,7 +53,7 @@ class PlayerControls extends Component {
     const pause = <FontAwesomeIcon icon={faPause} />
     const next = <FontAwesomeIcon icon={faForward} />
     const previous = <FontAwesomeIcon icon={faBackward} />
-    const joinButton = (this.props.owner ? <Button className='playerControls' onClick={() => this.props.joinSelfButton()}>Restart Playlist</Button> : <Button className='button' onClick={() => this.props.joinPlaylist()}>Sync</Button>);
+    const joinButton = (this.props.owner ? <Button className='playerControls' onClick={() => this.props.joinSelfButton()}>Restart Playlist</Button> : <Button className='playerControls' onClick={() => this.props.joinPlaylist()}>Sync</Button>);
     const playerControls = (this.props.owner ? <>
       <Button className="playerControls" onClick={() => this.onPrevClick()}>{previous}</Button>
       <Button className='playerControls' onClick={() => this.onPlayClick()}>{this.props.playing ? pause : play}</Button>
