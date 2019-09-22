@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as Actions from '../../redux/action';
 import { connect } from 'react-redux';
 import CustomPlaylist from './CustomPlaylist';
-import { ListGroup, Container, Col, Row } from 'react-bootstrap';
+import { ListGroup, Container, Col, Row, Card } from 'react-bootstrap';
 
 class PlaylistPickerPage extends Component {
   constructor(props) {
@@ -37,15 +37,30 @@ class PlaylistPickerPage extends Component {
     }) : renderUserPlaylists = <p> No Playlist Loaded </p>)
     return (
       <Container>
-
+        <Row>
+          <Col md={{ offset: 2, span: 8 }} >
+            <Card className='titlePickCard' >CHOOSE YOUR TUNES</Card>
+          </Col>
+        </Row>
         <Row className="justify-content-center">
-          <Col style={{ marginTop: '2em' }} md={{ span: 5, offset: 0 }}>
+          <Col style={{ marginTop: '1.5em' }} lg={{ span: 5, offset: 0 }}>
+            <Card className='pickACard'>Your Spotify Playlists</Card>
             <ListGroup>
               {renderUserPlaylists}
             </ListGroup>
           </Col>
-          <Col style={{ marginTop: '2em' }} md={{ span: 5, offset: 2 }}>
+          <Col style={{ marginTop: '1.5em' }} lg={{ span: 5, offset: 0 }}>
+            <Card className='pickACard'>Upload Playlist</Card>
             <CustomPlaylist spotify_id={this.props.user.spotify_id} />
+            <Card className='infoCard'>
+              <Card.Text>
+                <ul style={{ paddingInlineStart: '1em'}}>If you would like to listen to a Spotify playlist other than your own, then:
+                  <li> Step 1: </li>
+                  <li> Step 1: </li>
+                  <li> Step 1: </li>
+                </ul>
+              </Card.Text>
+            </Card>
           </Col>
         </Row>
       </Container>
