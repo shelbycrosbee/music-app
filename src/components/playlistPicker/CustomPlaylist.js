@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux';
 import * as Actions from '../../redux/action';
 import { connect } from 'react-redux';
@@ -33,7 +33,8 @@ export default withRouter(connect(mapStateToProps, mapDispatchToProps)(class Cus
   handleSubmit = async (e) => {
     e.preventDefault();
     let sub_modified_uri = this.state.id.replace('spotify:playlist:', '');
-    let modified_uri = sub_modified_uri.replace("https://open.spotify.com/playlist/",'');
+    let modified_uri = sub_modified_uri.replace("https://open.spotify.com/playlist/", '');
+    console.log(sub_modified_uri + ' ---- ' + modified_uri);
     await axios.put(`${process.env.REACT_APP_API_URL}users/updatePlaylist`, { spotify_id: this.props.spotify_id, playlist_uri: modified_uri });
     await this.props.getPlaylist();
     this.props.storeTopic(this.props.user.spotify_id)
@@ -54,7 +55,7 @@ export default withRouter(connect(mapStateToProps, mapDispatchToProps)(class Cus
             name="id"
             onChange={e => this.handleEditChange(e)}
             className='uriForm'
-            />
+          />
           <Button type="submit"> Submit! </Button>
         </Form>
       </div>
