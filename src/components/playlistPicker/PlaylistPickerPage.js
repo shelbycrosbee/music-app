@@ -54,7 +54,7 @@ class PlaylistPickerPage extends Component {
             <CustomPlaylist spotify_id={this.props.user.spotify_id} />
             <Card className='infoCard'>
               <Card.Text>
-                <ul style={{ paddingInlineStart: '1.5em'}} className='ulBullets'>If you'd like to listen to a Spotify playlist other than your own:
+                <ul style={{ paddingInlineStart: '1.5em'}} className='ulBullets'><b>If you'd like to listen to a Spotify playlist other than your own:</b>
                   <li className="listItemFont"> Go to the desired Spotify playlist's page </li>
                   <li className="listItemFont"> Click on the ellipsis ... </li>
                   <li className="listItemFont"> Copy Playlist Link</li>

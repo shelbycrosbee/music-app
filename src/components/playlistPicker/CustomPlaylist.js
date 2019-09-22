@@ -54,7 +54,7 @@ export default withRouter(connect(mapStateToProps, mapDispatchToProps)(class Cus
             onChange={e => this.handleEditChange(e)}
             className='uriForm'
             />
-          <Button type="submit"> Submit! </Button>
+          <Button type="submit" className="playlistItem"> Submit! </Button>
         </Form>
       </div>
     )

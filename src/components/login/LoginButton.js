@@ -24,6 +24,7 @@ export default class LoginButton extends Component {
       <Button size="lg"  className="loginButton">
         <a href={`${authEndpoint}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}> Login </a>
       </Button>
+      {/* You need Spotify Premium to use this app */}
       </Col>
       </Row>
     )

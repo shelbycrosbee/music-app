@@ -1,6 +1,7 @@
 .playlistItem{
   background-color: #6A4D85;
   color: white;
+  border-color:#6A4D85
 }
 
 .playlistItem:hover{
@@ -32,6 +33,8 @@
 
 .infoCard{
   margin-top: 1em;
+  border-color: rgb(211, 174, 232);
+  border-width: .3em;
 }
 
 .listItemFont {

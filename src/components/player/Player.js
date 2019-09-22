@@ -180,10 +180,7 @@ class Player extends React.Component {
 
 
   async changePlaylist(spotify_id) {
-    // const data = await axios.get('/playlist', {
-    //   params: { spotify_id }
-    // })
-    // this.joinSpotifyPlaylist(data.data.playlist)
+
     const { deviceId } = this.state;
     this.props.startListening(deviceId, spotify_id);
 
@@ -196,20 +193,11 @@ class Player extends React.Component {
     const { deviceId } = this.state;
     // console.log(playlist_data)
     await joinOther(playlist_data, deviceId, this.props.token);
-    await console.log('Timestamp#1:' + Date.now())
     let seekProgressMS = parseInt(playlist_data.progress_ms) - parseInt(playlist_data.join_time) + Date.now();
     this.player.seek(seekProgressMS + .5 * 1000).then(() => console.log(seekProgressMS))
     setTimeout(this.player.togglePlay(), .5 * 1000)
-    await console.log('Timestamp#2:' + Date.now())
 
-    // this.player.pause();
-    // setTimeout(() => {
 
-    //   // this.setState({ playerDelay: false })
-    // this.player.seek(this.props.syncMS)
-    // this.player.pause();
-    //   }
-    //     , 3000)
   }
 
   async joinSelfButton() {
@@ -254,7 +242,8 @@ class Player extends React.Component {
     let playerOrPlaylists = (this.props.topic_id !== "" ?
       <>
         <div>
-          {/* <h3>Code School Spotify Player</h3> */}
+          <h3>NOW PLAYING</h3>
+          <br/>
         </div>
 
         {error && <p>Error: {error}</p>}
