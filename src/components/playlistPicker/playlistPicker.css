@@ -24,7 +24,7 @@
 
 .titlePickCard{
   background-color: #1C5253;
-  color: #8ACB88;
+  color: #F3FFC6;
   font-size: 2em;
   text-align: center;
   margin-top: .5em;
@@ -32,4 +32,18 @@
 
 .infoCard{
   margin-top: 1em;
+}
+
+.listItemFont {
+  font-size: 13px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.ulBullets{
+  list-style: inherit;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.uriForm{
+  margin-right: .5em
 }

@@ -59,8 +59,8 @@ class Playlists extends Component {
       <Container>
         <Row>
           <Col lg={{ span: 8, offset: 2 }}>
-        <Accordion defaultActiveKey="0">
-          <Card>
+        <Accordion defaultActiveKey="0" >
+          <Card className="accordionWhole">
             <Accordion.Toggle as={Card.Header} eventKey="1"className="cardForPersonal">
               {this.props.user.display_name}'s Playlist
             </Accordion.Toggle>
@@ -76,12 +76,12 @@ class Playlists extends Component {
             </Accordion.Collapse>
           </Card>
 
-          <Card>
+          <Card className="accordionWhole">
             <Accordion.Toggle as={Card.Header} eventKey="0" className="activeUser">
               Active Users
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
-              <Card.Body ><ul style={{ paddingInlineStart: '0' }}>{content}</ul></Card.Body>
+              <Card.Body className="accordionToggleOthers" ><ul style={{ paddingInlineStart: '0' }}>{content}</ul></Card.Body>
             </Accordion.Collapse>
           </Card>
           </Accordion>

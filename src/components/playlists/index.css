@@ -12,14 +12,18 @@
 
 .your{
   font-size: 20px;
-  color: rgb(132, 85, 177);
+  color: white;
+  border-color:  rgb(36, 6, 49);
+  background-color: rgb(56, 16, 94);
+  margin-bottom: .25em
 }
 
 .redirect{
   font-size: 20px;
-  background-color: rgb(132, 85, 177);
-  color: white;
-  margin-bottom: .25em
+  background-color: rgb(190, 158, 218);
+  color: rgb(36, 6, 49);
+  margin-bottom: .25em;
+  border-color: rgb(36, 6, 49)
 }
 
 ul {
@@ -33,7 +37,15 @@ ul {
 }
 
 .accordionToggleYour{
-  background-color:  rgb(176, 140, 209)
+  background-color:  white
+}
+
+/* .accordionToggleOthers{
+  background-color: rgb(171, 149, 192)
+} */
+
+.accordionWhole{
+  border-color: #F3FFC6;
 }
 
 /* .buttonForPersonal{

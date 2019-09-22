@@ -8,9 +8,9 @@ a {
 }
 
 .loginButton{
-  background-color: #8daa91;
-  border: #8DAA91;
-  color: #08605F;
+  background-color: #8ACB88;
+  border-color: #1C5253;
+  color: #1C5253;
 }
 
 .loginButton:hover{
@@ -18,9 +18,9 @@ a {
 }
 
 .logoutButton{
-  background-color: #08605F;
-  border: #08605F;
-  color: #8DAA91;
+  background-color: #1C5253;
+  border-color: #F3FFC6;
+  color: #8ACB88;
 }
 
 .logoutButton:hover{

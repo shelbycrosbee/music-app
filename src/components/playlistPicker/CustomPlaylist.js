@@ -4,6 +4,7 @@ import {withRouter} from 'react-router-dom'
 import { bindActionCreators } from 'redux';
 import * as Actions from '../../redux/action';
 import { connect } from 'react-redux';
+import { Button, Form } from 'react-bootstrap'
 
 const mapStateToProps = (state, props) => {
   return {
@@ -45,14 +46,16 @@ export default withRouter(connect(mapStateToProps, mapDispatchToProps)(class Cus
   render() {
     return (
       <div>
-        <form onSubmit={e => this.handleSubmit(e)}>
+        <Form onSubmit={e => this.handleSubmit(e)}>
           <input type="text"
             value={this.state.id}
-            placeholder='Enter the Spotify URI link for you playlist'
+            placeholder='Paste Playlist Link Here'
             name="id"
-            onChange={e => this.handleEditChange(e)} />
-          <button type="submit"> Submit! </button>
-        </form>
+            onChange={e => this.handleEditChange(e)}
+            className='uriForm'
+            />
+          <Button type="submit"> Submit! </Button>
+        </Form>
       </div>
     )
   }
