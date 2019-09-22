@@ -13,7 +13,7 @@ export default class Bio extends Component {
     return (
       <Container>
         <Row>
-          <Col className='textForBioPage'><h3><br /><u>Students of the Montana Code School 2019 Cohort</u></h3></Col>
+          <Col className='textForBioPage'><h3><br />Students of the Montana Code School 2019 Cohort</h3></Col>
         </Row>
         <Row className='textForBioPage'>
           <Col className='textForBioPage'>
@@ -74,7 +74,7 @@ export default class Bio extends Component {
 
 
         <Row>
-          <Col className='textForBioPage justify-content-center'><h3><u>Fearful Leaders</u></h3></Col>
+          <Col className='textForBioPage justify-content-center'><h3>Fearful Leaders</h3></Col>
         </Row>
 
         <Row className='textForBioPage justify-content-center'>

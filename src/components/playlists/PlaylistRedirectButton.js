@@ -38,6 +38,7 @@ class PlaylistRedirectButton extends Component {
     return (
       <>
         <button value={this.props.topic_id} onClick={(e) => this.playlistRedirect(e)} className="redirect"> Join {this.props.display_name} </button>
+        
       </>
     )
   }
