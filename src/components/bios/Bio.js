@@ -6,24 +6,30 @@ import taylor from '../images/taylor.jpg'
 import sara from '../images/sara.jpg'
 import chris from '../images/chris.jpeg'
 import tom from '../images/tom.jpeg'
-import markandgeorgie from '../images/instructors.svg'
+import markandgeorgie from '../images/markandgeorgie.jpg'
 
 export default class Bio extends Component {
   render() {
     return (
-      <Container>
+      <Container className="textForBioPage">
         <Row>
-          <Col className='textForBioPage'><h3><br />Students of the Montana Code School 2019 Cohort</h3></Col>
+          <Col lg={{ span: 8, offset: 2 }}>
+            <Card className='headerCard'>
+              <Card.Text>
+                Montana Code School Summer 2019 Cohort
+            </Card.Text>
+            </Card>
+          </Col>
         </Row>
         <Row className='textForBioPage'>
           <Col className='textForBioPage'>
             <Card style={{ width: '10rem' }} className="cardForBio">
               <Card.Img variant="top" src={chris} />
               <Card.Body>
-                <Card.Title>Chris Kozlik</Card.Title>
+                <Card.Title className='textForBioPage'>Chris Kozlik</Card.Title>
                 <Card.Text>
                 </Card.Text>
-                <Button className="button" href="https://github.com/Ckozlik/Ckozlik.github.io" target="blank">My GitHub</Button>
+                <Button className="bioButton" href="https://github.com/Ckozlik/Ckozlik.github.io" target="blank">My GitHub</Button>
               </Card.Body>
             </Card>
           </Col>
@@ -31,20 +37,20 @@ export default class Bio extends Component {
           <Col className='textForBioPage'><Card style={{ width: '10rem' }} className="cardForBio">
             <Card.Img variant="top" src={sara} />
             <Card.Body>
-              <Card.Title>Sara Lewis</Card.Title>
+              <Card.Title className='textForBioPage'>Sara Lewis</Card.Title>
               <Card.Text>
               </Card.Text>
-              <Button className="button" href="https://github.com/saralouwho" target="blank">My GitHub</Button>
+              <Button className="bioButton" href="https://github.com/saralouwho" target="blank">My GitHub</Button>
             </Card.Body>
           </Card></Col>
 
           <Col className='textForBioPage'><Card style={{ width: '10rem' }} className="cardForBio">
             <Card.Img variant="top" src={shelby} />
             <Card.Body>
-              <Card.Title>Shelby Miller</Card.Title>
+              <Card.Title className='textForBioPage'>Shelby Miller</Card.Title>
               <Card.Text>
               </Card.Text>
-              <Button className="button" href="https://shelby-resume.herokuapp.com/" target="blank">Visit My Website</Button>
+              <Button className="bioButton" href="https://shelby-resume.herokuapp.com/" target="blank">My Website</Button>
             </Card.Body>
           </Card>
           </Col>
@@ -53,20 +59,20 @@ export default class Bio extends Component {
           <Col className='textForBioPage'><Card style={{ width: '10rem' }} className="cardForBio">
             <Card.Img variant="top" src={taylor} />
             <Card.Body>
-              <Card.Title>Taylor Warren</Card.Title>
+              <Card.Title className='textForBioPage'>Taylor Warren</Card.Title>
               <Card.Text>
               </Card.Text>
-              <Button className="button" href="https://youtu.be/dQw4w9WgXcQ?t=85" target="blank">My GitHub</Button>
+              <Button className="bioButton" href="https://youtu.be/dQw4w9WgXcQ?t=85" target="blank">My GitHub</Button>
             </Card.Body>
           </Card></Col>
 
           <Col className='textForBioPage'><Card style={{ width: '10rem' }} className="cardForBio">
             <Card.Img variant="top" src={tom} />
             <Card.Body>
-              <Card.Title>Tom Bawel</Card.Title>
+              <Card.Title className='textForBioPage'>Tom Bawel</Card.Title>
               <Card.Text>
               </Card.Text>
-              <Button className="button" href="https://github.com/tbawel" target="blank">My GitHub</Button>
+              <Button className="bioButton" href="https://github.com/tbawel" target="blank">My GitHub</Button>
             </Card.Body>
           </Card></Col>
 
@@ -74,21 +80,26 @@ export default class Bio extends Component {
 
 
         <Row>
-          <Col className='textForBioPage justify-content-center'><h3>Fearful Leaders</h3></Col>
+          <Col lg={{span: 4, offset: 4}}>
+            <Card  className="secondHeaderCard">
+              <Card.Text>
+                Fearful Leaders
+            </Card.Text>
+            </Card>
+          </Col>
         </Row>
 
         <Row className='textForBioPage justify-content-center'>
           <Col></Col>
           <Col className='textForBioPage'>
-            <Card style={{ width: '25rem' }} className="cardForBio">
+            <Card style={{ width: '25rem' }} className="cardForBio markAndGeorgieImage">
               <Card.Img variant="top" src={markandgeorgie} />
               <Card.Body>
-                <Card.Title>Mark Buckner and Georgie Kirschner</Card.Title>
+              <Card.Title>Mark Buckner and Georgie Kirschner</Card.Title>
                 <Card.Text>
                 </Card.Text>
-                <Button className="button" href="https://www.talents-models.com/en/men/1821-marc-buckner/" target="blank">Mark's Website</Button>
-                -
-                <Button className="button" href="https://www.theindustrymodelmgmt.com/model/new-york/management/724-georgie-taylor/" target="blank">Georgie's Website</Button>
+                <Button className="markAndGeorgieButton" href="https://www.talents-models.com/en/men/1821-marc-buckner/" target="blank" >Mark's Website</Button>
+                <Button className="bioButton" href="https://www.theindustrymodelmgmt.com/model/new-york/management/724-georgie-taylor/" target="blank">Georgie's Website</Button>
               </Card.Body>
             </Card>
           </Col>
