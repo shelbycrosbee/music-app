@@ -141,7 +141,7 @@ class Player extends React.Component {
         } = state.track_window;
         const newTrackUri = currentTrack.uri;
         if(newTrackUri !== this.state.trackUri){
-          this.toggleChangeSong();
+          setTimeout(this.toggleChangeSong(), 1.5 * 1000);
         }
       }
       this.onStateChanged(state)
@@ -213,8 +213,8 @@ class Player extends React.Component {
     await joinOther(playlist_data, deviceId, this.props.token);
     await console.log('Timestamp#1:' + Date.now())
     let seekProgressMS = parseInt(playlist_data.progress_ms) - parseInt(playlist_data.join_time) + Date.now();
-    this.player.seek(seekProgressMS + .5 * 1000).then(() => console.log(seekProgressMS))
-    setTimeout(this.player.togglePlay(), .5 * 1000)
+    this.player.seek(seekProgressMS + 1 * 1000).then(() => console.log(seekProgressMS))
+    setTimeout(this.player.play(), 1 * 1000)
     await console.log('Timestamp#2:' + Date.now())
 
     // this.player.pause();
