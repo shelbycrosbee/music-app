@@ -5,22 +5,41 @@
 }
 
 .activeUser{
-  background-color: rgb(132, 85, 177);
-  color: white;
+  background-color: #1C5253;
+  color: #8ACB88;
   font-size: 28px;
 }
 
 .your{
-  font-size: 28px;
+  font-size: 20px;
   color: rgb(132, 85, 177);
 }
 
 .redirect{
   font-size: 20px;
-  background-color:#1a0526;
-  color: white
+  background-color: rgb(132, 85, 177);
+  color: white;
+  margin-bottom: .25em
 }
 
 ul {
   list-style: none
 }
+
+.cardForPersonal{
+  font-size: 28px;
+  background-color: #8ACB88;
+  color:#1C5253
+}
+
+.accordionToggleYour{
+  background-color:  rgb(176, 140, 209)
+}
+
+/* .buttonForPersonal{
+  margin-bottom: .25em;
+  border: #3A7D44;
+  color: #1C5253;
+  font-size: 20px;
+} */
+

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import PlaylistRedirectButton from './PlaylistRedirectButton'
-import { Accordion, Card } from 'react-bootstrap'
+import { Accordion, Card, Container, Row, Col } from 'react-bootstrap'
 import "./index.css"
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -55,15 +55,24 @@ class Playlists extends Component {
 
 
     return (
-      <>
+   
+      <Container>
+        <Row>
+          <Col lg={{ span: 8, offset: 2 }}>
         <Accordion defaultActiveKey="0">
           <Card>
-            <Accordion.Toggle as={Card.Header} eventKey="1" className="your">
+            <Accordion.Toggle as={Card.Header} eventKey="1"className="cardForPersonal">
               {this.props.user.display_name}'s Playlist
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="1">
-              <Card.Body><button onClick={() => this.getMyPlaylist()}>Start Your Music!</button><br/>
-              <button onClick={() => this.pickPageRedirect()}> Pick A Playlist </button></Card.Body>
+              <Card.Body className="accordionToggleYour" >
+                <ul style={{ paddingInlineStart: '0' }}>
+                  <li><button  className="your" onClick={() => this.getMyPlaylist()}  >Start Your Music!</button></li>
+                  <li>
+                    <button  className="your" onClick={() => this.pickPageRedirect()} > Pick A Playlist </button>
+                  </li>
+                </ul>
+              </Card.Body>
             </Accordion.Collapse>
           </Card>
 
@@ -72,13 +81,15 @@ class Playlists extends Component {
               Active Users
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
-              <Card.Body><ul style={{ paddingInlineStart: '0' }}>{content}</ul></Card.Body>
+              <Card.Body ><ul style={{ paddingInlineStart: '0' }}>{content}</ul></Card.Body>
             </Accordion.Collapse>
           </Card>
-
-
-        </Accordion>
-      </>
+          </Accordion>
+          </Col>
+          </Row>
+        
+        </Container>
+   
 
     )
   }

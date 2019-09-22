@@ -3,10 +3,16 @@
 }
 
 .bodyText{
-  color: white;
+  color: #F3FFC6;
   font-family: 'Righteous', cursive;
 }
 
-.button{
-  background-color: rgb(170, 109, 226)
+.playerControls{
+  background-color: rgb(170, 109, 226);
+  margin-right: .2em;
+  border-color: #F3FFC6
+}
+
+.titleColors{
+ color: rgb(170, 109, 226)
 }

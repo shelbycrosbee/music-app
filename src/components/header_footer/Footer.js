@@ -27,7 +27,7 @@ class Footer extends Component {
       // </footer>
       <div>
         <div className='clear'></div>
-        <footer className='footer'>&#9836; &emsp; &#9834;&#9836;	</footer>
+        <footer className='footer'>&#9836; &emsp; &#9834; &emsp; &#9836;	</footer>
       </div>
 
     )

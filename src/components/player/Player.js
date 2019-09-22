@@ -254,7 +254,7 @@ class Player extends React.Component {
     let playerOrPlaylists = (this.props.topic_id !== "" ?
       <>
         <div>
-          <h3>Code School Spotify Player</h3>
+          {/* <h3>Code School Spotify Player</h3> */}
         </div>
 
         {error && <p>Error: {error}</p>}
@@ -263,9 +263,9 @@ class Player extends React.Component {
 
           <Col>
             <img src={albumImage} />
-            <p><u>Artist</u>: {artistName}</p>
-            <p><u>Track</u>: {trackName}</p>
-            <p><u>Album</u>: {albumName}</p>
+            <p><b className="titleColors">Artist:  </b>{artistName}</p>
+            <p><b className="titleColors">Track: </b>{trackName}</p>
+            <p><b className="titleColors">Album: </b>{albumName}</p>
             {/* <PlayerControls
               playing={this.state.playing}
               player={this.player}

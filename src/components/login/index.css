@@ -6,3 +6,23 @@
 a {
   color: black
 }
+
+.loginButton{
+  background-color: #8daa91;
+  border: #8DAA91;
+  color: #08605F;
+}
+
+.loginButton:hover{
+  background-color: rgb(47, 162, 47);
+}
+
+.logoutButton{
+  background-color: #08605F;
+  border: #08605F;
+  color: #8DAA91;
+}
+
+.logoutButton:hover{
+  background-color: rgb(53, 148, 147)
+}
