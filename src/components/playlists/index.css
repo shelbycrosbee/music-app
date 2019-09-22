@@ -18,12 +18,28 @@
   margin-bottom: .25em
 }
 
+.your:hover{
+  font-size: 20px;
+  color: white;
+  border-color:  rgb(190, 158, 218);
+  background-color: rgb(190, 158, 218);
+  margin-bottom: .25em
+}
+
 .redirect{
   font-size: 20px;
   background-color: rgb(190, 158, 218);
   color: rgb(36, 6, 49);
   margin-bottom: .25em;
   border-color: rgb(36, 6, 49)
+}
+
+.redirect:hover{
+  font-size: 22px;
+  background-color:  rgb(36, 6, 49);
+  color: rgb(190, 158, 218);
+  margin-bottom: .25em;
+  border-color: rgb(190, 158, 218)
 }
 
 ul {
