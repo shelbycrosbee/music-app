@@ -12,16 +12,16 @@
 
 .your{
   font-size: 20px;
-  color: white;
-  border-color:  rgb(36, 6, 49);
+  color: rgb(193, 172, 212);
+  border-color:  rgb(193, 172, 212);
   background-color: rgb(56, 16, 94);
   margin-bottom: .25em
 }
 
 .your:hover{
   font-size: 20px;
-  color: white;
-  border-color:  rgb(190, 158, 218);
+  color: rgb(56, 16, 94);
+  border-color:  rgb(56, 16, 94);
   background-color: rgb(190, 158, 218);
   margin-bottom: .25em
 }
