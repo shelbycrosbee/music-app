@@ -35,9 +35,15 @@ class PlaylistRedirectButton extends Component {
     // })
   }
   render() {
+    let listeningTo;
+    (this.props.display === this.props.playlist_master ?
+      listeningTo = ''
+      :
+      listeningTo = ` on ${this.props.playlist_master}'s playlist`
+    )
     return (
       <>
-        <button value={this.props.topic_id} onClick={(e) => this.playlistRedirect(e)} className="redirect"> Join {this.props.display_name} </button>
+        <button value={this.props.topic_id} onClick={(e) => this.playlistRedirect(e)} className="redirect"> Join {this.props.display_name}{listeningTo}</button>
         
       </>
     )
