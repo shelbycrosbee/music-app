@@ -135,12 +135,12 @@ class Player extends React.Component {
 
     // Playback status updates
     this.player.on('player_state_changed', state => {
-      if (state !== null){
+      if (state !== null) {
         const {
           current_track: currentTrack,
         } = state.track_window;
         const newTrackUri = currentTrack.uri;
-        if(newTrackUri !== this.state.trackUri){
+        if (newTrackUri !== this.state.trackUri && this.props.user.spotify_id === this.props.topic_id) {
           setTimeout(this.toggleChangeSong(), 1.5 * 1000);
         }
       }
@@ -234,8 +234,8 @@ class Player extends React.Component {
     // await joinSelf(this.props.playlist, deviceId, this.props.token)
   }
 
-  toggleChangeSong(){
-    this.setState({changeSong: !this.state.changeSong});
+  toggleChangeSong() {
+    this.setState({ changeSong: !this.state.changeSong });
   }
 
 
