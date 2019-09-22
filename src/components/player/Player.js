@@ -20,12 +20,14 @@ class Player extends React.Component {
       artistName: "Artist Name",
       albumName: "Album Name",
       albumImage: '',
+      trackUri: '',
       playing: false,
       position: 0,
       duration: 0,
       spotifyInit: false,
       joinedMyPlaylist: false,
-      playerDelay: false
+      playerDelay: false,
+      changeSong: false
     };
     this.checkForPlayer = this.checkForPlayer.bind(this);
     this.joinPlaylist = this.joinPlaylist.bind(this)
@@ -104,6 +106,7 @@ class Player extends React.Component {
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
       const albumImage = currentTrack.album.images[0].url;
+      const trackUri = currentTrack.uri;
       const artistName = currentTrack.artists
         .map(artist => artist.name)
         .join(", ");
@@ -115,7 +118,8 @@ class Player extends React.Component {
         trackName,
         albumName,
         artistName,
-        playing
+        playing,
+        trackUri
       });
     }
   }
@@ -130,7 +134,18 @@ class Player extends React.Component {
     this.player.on('playback_error', e => { console.error(e); });
 
     // Playback status updates
-    this.player.on('player_state_changed', state => this.onStateChanged(state));
+    this.player.on('player_state_changed', state => {
+      if (state !== null){
+        const {
+          current_track: currentTrack,
+        } = state.track_window;
+        const newTrackUri = currentTrack.uri;
+        if(newTrackUri !== this.state.trackUri){
+          this.toggleChangeSong();
+        }
+      }
+      this.onStateChanged(state)
+    });
 
     // Ready
     this.player.on('ready', data => {
@@ -218,6 +233,10 @@ class Player extends React.Component {
     // await joinSelf(this.props.playlist, deviceId, this.props.token)
   }
 
+  toggleChangeSong(){
+    this.setState({changeSong: !this.state.changeSong});
+  }
+
 
   getPosition() {
     // let checkJoinTime = Date.now();
@@ -285,6 +304,8 @@ class Player extends React.Component {
               spotifyInit={this.state.spotifyInit}
               joinSelfButton={() => this.joinSelfButton()}
               owner={this.props.topic_id === this.props.user.spotify_id}
+              changeSong={this.state.changeSong}
+              toggleChangeSong={() => this.toggleChangeSong()}
             />
           </Col>
         </Row>
