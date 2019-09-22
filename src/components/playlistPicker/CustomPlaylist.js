@@ -33,7 +33,8 @@ export default withRouter(connect(mapStateToProps, mapDispatchToProps)(class Cus
   handleSubmit = async (e) => {
     e.preventDefault();
     let sub_modified_uri = this.state.id.replace('spotify:playlist:', '');
-    let modified_uri = sub_modified_uri.replace("https://open.spotify.com/playlist/", '');
+    let super_sub_modified_uri = sub_modified_uri.replace("https://open.spotify.com/playlist/", '');
+    let modified_uri = super_sub_modified_uri.split('?')[0];
     console.log(sub_modified_uri + ' ---- ' + modified_uri);
     await axios.put(`${process.env.REACT_APP_API_URL}users/updatePlaylist`, { spotify_id: this.props.spotify_id, playlist_uri: modified_uri });
     await this.props.getPlaylist();
