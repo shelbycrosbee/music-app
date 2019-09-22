@@ -35,8 +35,8 @@ class PlaylistRedirectButton extends Component {
     // })
   }
   render() {
-    let listeningTo;
-    (this.props.display === this.props.playlist_master ?
+    let listeningTo = '';
+    (this.props.display_name === this.props.playlist_master ?
       listeningTo = ''
       :
       listeningTo = ` on ${this.props.playlist_master}'s playlist`
