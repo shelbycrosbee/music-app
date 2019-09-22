@@ -13,7 +13,7 @@ export default class Bio extends Component {
     return (
       <Container className="textForBioPage">
         <Row>
-          <Col lg={{ span: 8, offset: 2 }}>
+          <Col lg={{ span: 8, offset: 2 }} md={{ span: 10, offset: 1 }}>
             <Card className='headerCard'>
               <Card.Text>
                 Montana Code School Summer 2019 Cohort
