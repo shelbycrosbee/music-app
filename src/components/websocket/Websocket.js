@@ -43,7 +43,7 @@ class Websocket extends React.Component {
       this.setState({ mayIAsk: false })
     }
     if(this.props.changeSong === true){
-      const playlist_data = await this.props.getPosition();
+      const playlist_data = this.props.getPosition();
         // console.log(`Time_00: ${time_00} -- Time_01: ${playlist_data.time_01} -- Time_03: ${time_02}`);
         //api call to websocket
         this.state.playlist.emit('giveGlobalPosition', { playlist: { ...playlist_data, join_time: Date.now()}});
