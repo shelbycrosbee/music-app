@@ -96,10 +96,6 @@ export default class Bio extends Component {
               <Card.Img variant="top" src={markandgeorgie} />
               <Card.Body>
               <Card.Title>Mark Buckner and Georgie Kirschner</Card.Title>
-                <Card.Text>
-                </Card.Text>
-                <Button className="markAndGeorgieButton" href="https://www.talents-models.com/en/men/1821-marc-buckner/" target="blank" >Mark's Website</Button>
-                <Button className="bioButton" href="https://www.theindustrymodelmgmt.com/model/new-york/management/724-georgie-taylor/" target="blank">Georgie's Website</Button>
               </Card.Body>
             </Card>
           </Col>
